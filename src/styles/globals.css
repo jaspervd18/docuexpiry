@@ -6,6 +6,32 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* Custom utility classes for primary color variants */
+.bg-primary-50 {
+  background-color: var(--primary-50);
+}
+.bg-primary-100 {
+  background-color: var(--primary-100);
+}
+.bg-primary-200 {
+  background-color: var(--primary-200);
+}
+.text-primary-50 {
+  color: var(--primary-50);
+}
+.text-primary-100 {
+  color: var(--primary-100);
+}
+.text-primary-200 {
+  color: var(--primary-200);
+}
+.border-primary-100 {
+  border-color: var(--primary-100);
+}
+.border-primary-200 {
+  border-color: var(--primary-200);
+}
+
 :root {
   --radius: 0.65rem;
 
@@ -20,6 +46,18 @@
 
   --primary: oklch(0.852 0.199 91.936);
   --primary-foreground: oklch(0.421 0.095 57.708);
+
+  /* Primary color with explicit opacity variants for Tailwind compatibility */
+  --primary-50: oklch(0.97 0.02 91.936);
+  --primary-100: oklch(0.94 0.04 91.936);
+  --primary-200: oklch(0.89 0.08 91.936);
+  --primary-300: oklch(0.82 0.12 91.936);
+  --primary-400: oklch(0.75 0.16 91.936);
+  --primary-500: oklch(0.852 0.199 91.936);
+  --primary-600: oklch(0.73 0.19 91.936);
+  --primary-700: oklch(0.61 0.17 91.936);
+  --primary-800: oklch(0.49 0.14 91.936);
+  --primary-900: oklch(0.37 0.11 91.936);
 
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
@@ -64,6 +102,18 @@
 
   --primary: oklch(0.795 0.184 86.047);
   --primary-foreground: oklch(0.421 0.095 57.708);
+
+  /* Primary color with explicit opacity variants for dark mode */
+  --primary-50: oklch(0.25 0.02 86.047);
+  --primary-100: oklch(0.3 0.04 86.047);
+  --primary-200: oklch(0.4 0.08 86.047);
+  --primary-300: oklch(0.5 0.12 86.047);
+  --primary-400: oklch(0.65 0.16 86.047);
+  --primary-500: oklch(0.795 0.184 86.047);
+  --primary-600: oklch(0.7 0.17 86.047);
+  --primary-700: oklch(0.6 0.15 86.047);
+  --primary-800: oklch(0.45 0.12 86.047);
+  --primary-900: oklch(0.3 0.09 86.047);
 
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
