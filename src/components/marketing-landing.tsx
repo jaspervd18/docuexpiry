@@ -33,7 +33,7 @@ export function MarketingLanding(props: { signInHref: string; appHref: string })
               <Sparkles className="h-4 w-4 text-primary" />
             </span>
             <span>DocuExpiry</span>
-            <Badge variant="secondary" className="ml-2 hidden sm:inline-flex">Beta</Badge>
+            <Badge variant="secondary" className="ml-2 hidden sm:inline-flex">I hou van Emelie</Badge>
           </Link>
 
           <nav className="hidden items-center gap-6 text-sm sm:flex">
