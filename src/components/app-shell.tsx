@@ -8,7 +8,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
   if (!session?.user) redirect("/api/auth/signin");
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-background">
       <SiteHeader user={session.user} />
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
       <SiteFooter />
