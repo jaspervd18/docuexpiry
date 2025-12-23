@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { AppShell } from "~/components/app-shell";
 import { DocumentsTable } from "~/components/documents-table";
-import { Button } from "~/components/ui/button";
 
 export default async function DocumentsPage() {
   return (
