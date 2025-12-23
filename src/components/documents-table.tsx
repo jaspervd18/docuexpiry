@@ -134,10 +134,10 @@ export function DocumentsTable() {
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-xl border border-border/50 bg-card/70 shadow-sm ring-1 ring-primary/10">
+      <div className="overflow-hidden rounded-xl border border-border/60 bg-card/80 shadow-sm ring-1 ring-primary/10">
         <Table>
-          <TableHeader className="bg-secondary">
-            <TableRow className="bg-muted/30">
+          <TableHeader>
+            <TableRow className="bg-primary/10 border-b border-border/60 text-foreground/80">
               <TableHead className="w-[40%]">
                 <Button
                   type="button"
@@ -181,7 +181,7 @@ export function DocumentsTable() {
             {listQuery.isLoading ? (
               <TableRow>
                 <TableCell
-                  colSpan={4}
+                  colSpan={5}
                   className="h-24 text-center text-muted-foreground"
                 >
                   Loading…
@@ -192,7 +192,7 @@ export function DocumentsTable() {
                 const tags = doc.tags.map((t) => t.tag.name);
 
                 return (
-                  <TableRow key={doc.id} className="hover:bg-primary/5 transition-colors">
+                  <TableRow key={doc.id} className="border-b border-border/50 hover:bg-primary/5 transition-colors">
                     <TableCell>
                       <div className="space-y-1">
                         <div className="font-medium">{doc.name}</div>
