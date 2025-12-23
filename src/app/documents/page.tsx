@@ -1,13 +1,26 @@
+import Link from "next/link";
 import { AppShell } from "~/components/app-shell";
+import { DocumentsTable } from "~/components/documents-table";
+import { Button } from "~/components/ui/button";
 
 export default async function DocumentsPage() {
   return (
     <AppShell>
-      <div className="space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Documents</h1>
-        <p className="text-sm text-muted-foreground">
-          Coming next: add documents and track their expiration dates.
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-semibold tracking-tight">Documents</h1>
+          <p className="text-sm text-muted-foreground">
+            Add documents and track their expiration dates.
+          </p>
+        </div>
+
+        <Button asChild>
+          <Link href="/documents/new">Add document</Link>
+        </Button>
+      </div>
+
+      <div className="mt-6">
+        <DocumentsTable />
       </div>
     </AppShell>
   );

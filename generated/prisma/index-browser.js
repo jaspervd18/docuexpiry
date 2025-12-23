@@ -121,12 +121,34 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.PostScalarFieldEnum = {
+exports.Prisma.DocumentScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  expiresAt: 'expiresAt',
+  notes: 'notes',
+  userId: 'userId',
+  categoryId: 'categoryId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdById: 'createdById'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.DocumentTagScalarFieldEnum = {
+  documentId: 'documentId',
+  tagId: 'tagId'
 };
 
 exports.Prisma.AccountScalarFieldEnum = {
@@ -183,7 +205,10 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Post: 'Post',
+  Document: 'Document',
+  Category: 'Category',
+  Tag: 'Tag',
+  DocumentTag: 'DocumentTag',
   Account: 'Account',
   Session: 'Session',
   User: 'User',
