@@ -1,4 +1,4 @@
-import { AppShell } from "~/app/_components/app-shell";
+import { AppShell } from "~/components/app-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 function KpiCard({
@@ -49,11 +49,9 @@ export default async function DashboardPage() {
               <CardTitle className="group-hover:text-primary transition-colors duration-200">Expiring soon</CardTitle>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
-              <div className="rounded-lg border border-border bg-gradient-to-br from-muted/20 to-muted/40 p-6 group-hover:border-primary-200 transition-colors duration-200">
-                <div className="font-medium text-foreground group-hover:text-primary transition-colors duration-200">No documents expiring soon 🎉</div>
-                <div className="mt-1 transition-colors duration-200">
-                  Once you add documents with expiry dates, they&apos;ll appear here.
-                </div>
+              <div className="font-medium text-foreground group-hover:text-primary transition-colors duration-200">No documents expiring soon 🎉</div>
+              <div className="mt-1 transition-colors duration-200">
+                Once you add documents with expiry dates, they&apos;ll appear here.
               </div>
             </CardContent>
           </Card>

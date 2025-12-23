@@ -53,7 +53,7 @@ export function SiteHeader({ user }: { user: Session["user"] }) {
             </button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end" className="w-56 bg-card border border-border/40 shadow-xl backdrop-blur-sm">
+          <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel className="space-y-1">
               <div className="text-sm font-medium leading-none">
                 {user?.name ?? "Account"}

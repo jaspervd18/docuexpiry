@@ -1,4 +1,4 @@
-import { AppShell } from "~/app/_components/app-shell";
+import { AppShell } from "~/components/app-shell";
 
 export default async function DocumentsPage() {
   return (
