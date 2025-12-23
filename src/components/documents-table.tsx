@@ -1,19 +1,25 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
-import { format } from "date-fns";
+import { z } from "zod";
+import {
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+  type ColumnDef,
+} from "@tanstack/react-table";
 
 import { api } from "~/trpc/react";
-import { DocumentStatusBadge } from "~/components/document-status-badge";
-
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import {
   Table,
   TableBody,
@@ -22,10 +28,43 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { useDebouncedValue } from "~/hooks/use-debounced-value";
+
+import { makeColumns, type DocumentRow } from "./documents-columns";
+import { DocumentsPagination } from "./documents-pagination";
+
+type SortBy = "name" | "category" | "expiresAt";
+type SortDir = "asc" | "desc";
+
+const StatusSchema = z.enum(["all", "expired", "expiring", "valid"]);
+type Status = z.infer<typeof StatusSchema>;
 
 export function DocumentsTable() {
   const utils = api.useUtils();
-  const listQuery = api.document.list.useQuery({ take: 100 });
+
+  const [search, setSearch] = React.useState("");
+  const debouncedSearch = useDebouncedValue(search, 300);
+
+  const [status, setStatus] = React.useState<Status>("all");
+  const [categoryId, setCategoryId] = React.useState<string>("all");
+
+  const [sortBy, setSortBy] = React.useState<SortBy>("expiresAt");
+  const [sortDir, setSortDir] = React.useState<SortDir>("asc");
+
+  const [page, setPage] = React.useState(1);
+  const [pageSize, setPageSize] = React.useState(20);
+
+  const categoriesQuery = api.document.listCategories.useQuery();
+
+  const listQuery = api.document.list.useQuery({
+    query: debouncedSearch,
+    status,
+    categoryId: categoryId === "all" ? undefined : categoryId,
+    sortBy,
+    sortDir,
+    page,
+    pageSize,
+  });
 
   const deleteMutation = api.document.delete.useMutation({
     onSuccess: async () => {
@@ -33,111 +72,187 @@ export function DocumentsTable() {
     },
   });
 
-  const docs = listQuery.data ?? [];
+  const result = listQuery.data;
+  const rows: DocumentRow[] =
+    result?.items.map((d) => ({
+      id: d.id,
+      name: d.name,
+      expiresAt: new Date(d.expiresAt),
+      categoryName: d.category?.name ?? null,
+      tags: d.tags.map((t) => t.tag.name),
+    })) ?? [];
 
-  if (listQuery.isLoading) {
-    return (
-      <div className="rounded-lg border bg-card p-6 text-sm text-muted-foreground">
-        Loading documents…
-      </div>
-    );
-  }
+  const totalPages = result?.totalPages ?? 1;
 
-  if (docs.length === 0) {
-    return (
-      <div className="rounded-lg border bg-card p-6">
-        <div className="text-base font-medium">No documents yet</div>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Add your first document to start tracking expirations.
-        </p>
-        <Button asChild className="mt-4">
+  const onSort = (col: SortBy) => {
+    setPage(1);
+    if (sortBy !== col) {
+      setSortBy(col);
+      setSortDir("asc");
+      return;
+    }
+    setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+  };
+
+  const columns = React.useMemo<ColumnDef<DocumentRow>[]>(
+    () =>
+      makeColumns({
+        onDelete: (doc) => {
+          const ok = window.confirm(`Delete "${doc.name}"? This can’t be undone.`);
+          if (!ok) return;
+          deleteMutation.mutate({ id: doc.id });
+        },
+        onSort,
+        sortBy,
+        sortDir,
+      }),
+    [deleteMutation, sortBy, sortDir],
+  );
+
+  const table = useReactTable({
+    data: rows,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
+  const categories = categoriesQuery.data ?? [];
+
+  const resetPage = () => setPage(1);
+
+  return (
+    <div className="w-full space-y-4">
+      {/* Toolbar (like shadcn demo) */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Input
+          placeholder="Search documents..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            resetPage();
+          }}
+          className="sm:max-w-sm"
+        />
+
+        <Select
+            value={status}
+            onValueChange={(v) => {
+                const parsed = StatusSchema.safeParse(v);
+                if (!parsed.success) return; // ignore unexpected values
+                setStatus(parsed.data);
+                resetPage();
+            }}
+        >
+          <SelectTrigger className="sm:w-45">
+            <SelectValue placeholder="Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All statuses</SelectItem>
+            <SelectItem value="expired">Expired</SelectItem>
+            <SelectItem value="expiring">Expiring (30d)</SelectItem>
+            <SelectItem value="valid">Valid</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={categoryId}
+          onValueChange={(v) => {
+            setCategoryId(v);
+            resetPage();
+          }}
+        >
+          <SelectTrigger className="sm:w-55">
+            <SelectValue placeholder="Category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All categories</SelectItem>
+            {categories.map((c) => (
+              <SelectItem key={c.id} value={c.id}>
+                {c.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={String(pageSize)}
+          onValueChange={(v) => {
+            setPageSize(Number(v));
+            setPage(1);
+          }}
+        >
+          <SelectTrigger className="sm:ml-auto sm:w-35">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="10">10 / page</SelectItem>
+            <SelectItem value="20">20 / page</SelectItem>
+            <SelectItem value="50">50 / page</SelectItem>
+            <SelectItem value="100">100 / page</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Button asChild>
           <Link href="/documents/new">Add document</Link>
         </Button>
       </div>
-    );
-  }
 
-  return (
-    <div className="rounded-lg border bg-card">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[40%]">Document</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Expires</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="w-[60px]" />
-          </TableRow>
-        </TableHeader>
+      {/* Table */}
+      <div className="overflow-hidden rounded-md border bg-card">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
 
-        <TableBody>
-          {docs.map((doc) => {
-            const tags = doc.tags.map((t) => t.tag.name);
-
-            return (
-              <TableRow key={doc.id}>
-                <TableCell>
-                  <div className="space-y-1">
-                    <div className="font-medium">{doc.name}</div>
-                    {tags.length > 0 ? (
-                      <div className="text-xs text-muted-foreground">
-                        {tags.slice(0, 3).join(", ")}
-                        {tags.length > 3 ? "…" : ""}
-                      </div>
-                    ) : null}
-                  </div>
-                </TableCell>
-
-                <TableCell className="text-sm text-muted-foreground">
-                  {doc.category?.name ?? "—"}
-                </TableCell>
-
-                <TableCell className="text-sm">
-                  {format(new Date(doc.expiresAt), "PP")}
-                </TableCell>
-
-                <TableCell>
-                  <DocumentStatusBadge expiresAt={new Date(doc.expiresAt)} />
-                </TableCell>
-
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" aria-label="Actions">
-                        ⋯
-                      </Button>
-                    </DropdownMenuTrigger>
-
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem asChild>
-                        <Link href={`/documents/${doc.id}`}>View</Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href={`/documents/${doc.id}/edit`}>Edit</Link>
-                      </DropdownMenuItem>
-
-                      <DropdownMenuSeparator />
-
-                      <DropdownMenuItem
-                        className="text-destructive focus:text-destructive"
-                        onClick={() => {
-                          const ok = window.confirm(
-                            `Delete "${doc.name}"? This can’t be undone.`,
-                          );
-                          if (!ok) return;
-                          deleteMutation.mutate({ id: doc.id });
-                        }}
-                      >
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+          <TableBody>
+            {listQuery.isLoading ? (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center text-muted-foreground">
+                  Loading…
                 </TableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+            ) : rows.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Footer + Pagination */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-sm text-muted-foreground">
+          Page {result?.page ?? page} of {totalPages} • {result?.total ?? 0} total
+        </div>
+
+        <DocumentsPagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={(p) => setPage(p)}
+        />
+      </div>
     </div>
   );
 }

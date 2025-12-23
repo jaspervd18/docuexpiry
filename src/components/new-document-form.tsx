@@ -228,7 +228,7 @@ export function NewDocumentForm() {
                   <FormItem className="md:col-span-2">
                     <FormLabel>Notes</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Optional notes…" className="min-h-[100px]" {...field} />
+                      <Textarea placeholder="Optional notes…" className="min-h-25" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

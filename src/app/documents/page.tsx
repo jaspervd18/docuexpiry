@@ -13,10 +13,6 @@ export default async function DocumentsPage() {
             Add documents and track their expiration dates.
           </p>
         </div>
-
-        <Button asChild>
-          <Link href="/documents/new">Add document</Link>
-        </Button>
       </div>
 
       <div className="mt-6">
