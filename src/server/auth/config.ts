@@ -47,4 +47,10 @@ export const authConfig = {
       },
     }),
   },
+  pages: {
+    signIn: "/auth/signin",
+    // optional later:
+    // error: "/auth/error",
+    // newUser: "/auth/welcome",
+  },
 } satisfies NextAuthConfig;
