@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 88px; /* sticky header offset */
+}
+
 :root {
   --radius: 0.65rem;
 

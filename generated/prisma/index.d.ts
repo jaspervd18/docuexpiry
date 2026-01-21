@@ -1663,8 +1663,18 @@ export namespace Prisma {
 
   export type AggregateDocument = {
     _count: DocumentCountAggregateOutputType | null
+    _avg: DocumentAvgAggregateOutputType | null
+    _sum: DocumentSumAggregateOutputType | null
     _min: DocumentMinAggregateOutputType | null
     _max: DocumentMaxAggregateOutputType | null
+  }
+
+  export type DocumentAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type DocumentSumAggregateOutputType = {
+    fileSize: number | null
   }
 
   export type DocumentMinAggregateOutputType = {
@@ -1672,6 +1682,11 @@ export namespace Prisma {
     name: string | null
     expiresAt: Date | null
     notes: string | null
+    fileUrl: string | null
+    filePathname: string | null
+    fileName: string | null
+    fileSize: number | null
+    fileType: string | null
     userId: string | null
     categoryId: string | null
     createdAt: Date | null
@@ -1683,6 +1698,11 @@ export namespace Prisma {
     name: string | null
     expiresAt: Date | null
     notes: string | null
+    fileUrl: string | null
+    filePathname: string | null
+    fileName: string | null
+    fileSize: number | null
+    fileType: string | null
     userId: string | null
     categoryId: string | null
     createdAt: Date | null
@@ -1694,6 +1714,11 @@ export namespace Prisma {
     name: number
     expiresAt: number
     notes: number
+    fileUrl: number
+    filePathname: number
+    fileName: number
+    fileSize: number
+    fileType: number
     userId: number
     categoryId: number
     createdAt: number
@@ -1702,11 +1727,24 @@ export namespace Prisma {
   }
 
 
+  export type DocumentAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type DocumentSumAggregateInputType = {
+    fileSize?: true
+  }
+
   export type DocumentMinAggregateInputType = {
     id?: true
     name?: true
     expiresAt?: true
     notes?: true
+    fileUrl?: true
+    filePathname?: true
+    fileName?: true
+    fileSize?: true
+    fileType?: true
     userId?: true
     categoryId?: true
     createdAt?: true
@@ -1718,6 +1756,11 @@ export namespace Prisma {
     name?: true
     expiresAt?: true
     notes?: true
+    fileUrl?: true
+    filePathname?: true
+    fileName?: true
+    fileSize?: true
+    fileType?: true
     userId?: true
     categoryId?: true
     createdAt?: true
@@ -1729,6 +1772,11 @@ export namespace Prisma {
     name?: true
     expiresAt?: true
     notes?: true
+    fileUrl?: true
+    filePathname?: true
+    fileName?: true
+    fileSize?: true
+    fileType?: true
     userId?: true
     categoryId?: true
     createdAt?: true
@@ -1774,6 +1822,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: DocumentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DocumentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: DocumentMinAggregateInputType
@@ -1804,6 +1864,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: DocumentCountAggregateInputType | true
+    _avg?: DocumentAvgAggregateInputType
+    _sum?: DocumentSumAggregateInputType
     _min?: DocumentMinAggregateInputType
     _max?: DocumentMaxAggregateInputType
   }
@@ -1813,11 +1875,18 @@ export namespace Prisma {
     name: string
     expiresAt: Date
     notes: string | null
+    fileUrl: string | null
+    filePathname: string | null
+    fileName: string | null
+    fileSize: number | null
+    fileType: string | null
     userId: string
     categoryId: string | null
     createdAt: Date
     updatedAt: Date
     _count: DocumentCountAggregateOutputType | null
+    _avg: DocumentAvgAggregateOutputType | null
+    _sum: DocumentSumAggregateOutputType | null
     _min: DocumentMinAggregateOutputType | null
     _max: DocumentMaxAggregateOutputType | null
   }
@@ -1841,6 +1910,11 @@ export namespace Prisma {
     name?: boolean
     expiresAt?: boolean
     notes?: boolean
+    fileUrl?: boolean
+    filePathname?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    fileType?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
@@ -1856,6 +1930,11 @@ export namespace Prisma {
     name?: boolean
     expiresAt?: boolean
     notes?: boolean
+    fileUrl?: boolean
+    filePathname?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    fileType?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
@@ -1869,6 +1948,11 @@ export namespace Prisma {
     name?: boolean
     expiresAt?: boolean
     notes?: boolean
+    fileUrl?: boolean
+    filePathname?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    fileType?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
@@ -1882,13 +1966,18 @@ export namespace Prisma {
     name?: boolean
     expiresAt?: boolean
     notes?: boolean
+    fileUrl?: boolean
+    filePathname?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    fileType?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "expiresAt" | "notes" | "userId" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "expiresAt" | "notes" | "fileUrl" | "filePathname" | "fileName" | "fileSize" | "fileType" | "userId" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
   export type DocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Document$categoryArgs<ExtArgs>
@@ -1916,6 +2005,11 @@ export namespace Prisma {
       name: string
       expiresAt: Date
       notes: string | null
+      fileUrl: string | null
+      filePathname: string | null
+      fileName: string | null
+      fileSize: number | null
+      fileType: string | null
       userId: string
       categoryId: string | null
       createdAt: Date
@@ -2350,6 +2444,11 @@ export namespace Prisma {
     readonly name: FieldRef<"Document", 'String'>
     readonly expiresAt: FieldRef<"Document", 'DateTime'>
     readonly notes: FieldRef<"Document", 'String'>
+    readonly fileUrl: FieldRef<"Document", 'String'>
+    readonly filePathname: FieldRef<"Document", 'String'>
+    readonly fileName: FieldRef<"Document", 'String'>
+    readonly fileSize: FieldRef<"Document", 'Int'>
+    readonly fileType: FieldRef<"Document", 'String'>
     readonly userId: FieldRef<"Document", 'String'>
     readonly categoryId: FieldRef<"Document", 'String'>
     readonly createdAt: FieldRef<"Document", 'DateTime'>
@@ -10403,6 +10502,11 @@ export namespace Prisma {
     name: 'name',
     expiresAt: 'expiresAt',
     notes: 'notes',
+    fileUrl: 'fileUrl',
+    filePathname: 'filePathname',
+    fileName: 'fileName',
+    fileSize: 'fileSize',
+    fileType: 'fileType',
     userId: 'userId',
     categoryId: 'categoryId',
     createdAt: 'createdAt',
@@ -10585,6 +10689,11 @@ export namespace Prisma {
     name?: StringFilter<"Document"> | string
     expiresAt?: DateTimeFilter<"Document"> | Date | string
     notes?: StringNullableFilter<"Document"> | string | null
+    fileUrl?: StringNullableFilter<"Document"> | string | null
+    filePathname?: StringNullableFilter<"Document"> | string | null
+    fileName?: StringNullableFilter<"Document"> | string | null
+    fileSize?: IntNullableFilter<"Document"> | number | null
+    fileType?: StringNullableFilter<"Document"> | string | null
     userId?: StringFilter<"Document"> | string
     categoryId?: StringNullableFilter<"Document"> | string | null
     createdAt?: DateTimeFilter<"Document"> | Date | string
@@ -10599,6 +10708,11 @@ export namespace Prisma {
     name?: SortOrder
     expiresAt?: SortOrder
     notes?: SortOrderInput | SortOrder
+    fileUrl?: SortOrderInput | SortOrder
+    filePathname?: SortOrderInput | SortOrder
+    fileName?: SortOrderInput | SortOrder
+    fileSize?: SortOrderInput | SortOrder
+    fileType?: SortOrderInput | SortOrder
     userId?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -10616,6 +10730,11 @@ export namespace Prisma {
     name?: StringFilter<"Document"> | string
     expiresAt?: DateTimeFilter<"Document"> | Date | string
     notes?: StringNullableFilter<"Document"> | string | null
+    fileUrl?: StringNullableFilter<"Document"> | string | null
+    filePathname?: StringNullableFilter<"Document"> | string | null
+    fileName?: StringNullableFilter<"Document"> | string | null
+    fileSize?: IntNullableFilter<"Document"> | number | null
+    fileType?: StringNullableFilter<"Document"> | string | null
     userId?: StringFilter<"Document"> | string
     categoryId?: StringNullableFilter<"Document"> | string | null
     createdAt?: DateTimeFilter<"Document"> | Date | string
@@ -10630,13 +10749,20 @@ export namespace Prisma {
     name?: SortOrder
     expiresAt?: SortOrder
     notes?: SortOrderInput | SortOrder
+    fileUrl?: SortOrderInput | SortOrder
+    filePathname?: SortOrderInput | SortOrder
+    fileName?: SortOrderInput | SortOrder
+    fileSize?: SortOrderInput | SortOrder
+    fileType?: SortOrderInput | SortOrder
     userId?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: DocumentCountOrderByAggregateInput
+    _avg?: DocumentAvgOrderByAggregateInput
     _max?: DocumentMaxOrderByAggregateInput
     _min?: DocumentMinOrderByAggregateInput
+    _sum?: DocumentSumOrderByAggregateInput
   }
 
   export type DocumentScalarWhereWithAggregatesInput = {
@@ -10647,6 +10773,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Document"> | string
     expiresAt?: DateTimeWithAggregatesFilter<"Document"> | Date | string
     notes?: StringNullableWithAggregatesFilter<"Document"> | string | null
+    fileUrl?: StringNullableWithAggregatesFilter<"Document"> | string | null
+    filePathname?: StringNullableWithAggregatesFilter<"Document"> | string | null
+    fileName?: StringNullableWithAggregatesFilter<"Document"> | string | null
+    fileSize?: IntNullableWithAggregatesFilter<"Document"> | number | null
+    fileType?: StringNullableWithAggregatesFilter<"Document"> | string | null
     userId?: StringWithAggregatesFilter<"Document"> | string
     categoryId?: StringNullableWithAggregatesFilter<"Document"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Document"> | Date | string
@@ -11068,6 +11199,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDocumentsInput
@@ -11080,6 +11216,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     userId: string
     categoryId?: string | null
     createdAt?: Date | string
@@ -11092,6 +11233,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -11104,6 +11250,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11116,6 +11267,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     userId: string
     categoryId?: string | null
     createdAt?: Date | string
@@ -11127,6 +11283,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11136,6 +11297,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11598,6 +11764,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -11628,10 +11805,19 @@ export namespace Prisma {
     name?: SortOrder
     expiresAt?: SortOrder
     notes?: SortOrder
+    fileUrl?: SortOrder
+    filePathname?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    fileType?: SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type DocumentAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
   }
 
   export type DocumentMaxOrderByAggregateInput = {
@@ -11639,6 +11825,11 @@ export namespace Prisma {
     name?: SortOrder
     expiresAt?: SortOrder
     notes?: SortOrder
+    fileUrl?: SortOrder
+    filePathname?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    fileType?: SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
@@ -11650,10 +11841,19 @@ export namespace Prisma {
     name?: SortOrder
     expiresAt?: SortOrder
     notes?: SortOrder
+    fileUrl?: SortOrder
+    filePathname?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    fileType?: SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type DocumentSumOrderByAggregateInput = {
+    fileSize?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -11704,6 +11904,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DocumentListRelationFilter = {
@@ -11798,17 +12014,6 @@ export namespace Prisma {
     tagId?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
     provider: string
     providerAccountId: string
@@ -11870,22 +12075,6 @@ export namespace Prisma {
   export type AccountSumOrderByAggregateInput = {
     expires_at?: SortOrder
     refresh_token_expires_in?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -12057,6 +12246,14 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutDocumentsNestedInput = {
@@ -12249,14 +12446,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
@@ -12534,6 +12723,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12591,17 +12791,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12840,6 +13029,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDocumentsInput
@@ -12851,6 +13045,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12926,6 +13125,11 @@ export namespace Prisma {
     name?: StringFilter<"Document"> | string
     expiresAt?: DateTimeFilter<"Document"> | Date | string
     notes?: StringNullableFilter<"Document"> | string | null
+    fileUrl?: StringNullableFilter<"Document"> | string | null
+    filePathname?: StringNullableFilter<"Document"> | string | null
+    fileName?: StringNullableFilter<"Document"> | string | null
+    fileSize?: IntNullableFilter<"Document"> | number | null
+    fileType?: StringNullableFilter<"Document"> | string | null
     userId?: StringFilter<"Document"> | string
     categoryId?: StringNullableFilter<"Document"> | string | null
     createdAt?: DateTimeFilter<"Document"> | Date | string
@@ -13035,6 +13239,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDocumentsInput
@@ -13046,6 +13255,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     userId: string
     categoryId?: string | null
     createdAt?: Date | string
@@ -13092,6 +13306,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -13103,6 +13322,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13329,6 +13553,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category?: CategoryCreateNestedOneWithoutDocumentsInput
@@ -13340,6 +13569,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13554,6 +13788,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13564,6 +13803,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -13575,6 +13819,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13586,6 +13835,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13633,6 +13887,11 @@ export namespace Prisma {
     name: string
     expiresAt: Date | string
     notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13718,6 +13977,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneWithoutDocumentsNestedInput
@@ -13729,6 +13993,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13740,6 +14009,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

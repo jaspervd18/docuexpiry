@@ -14,6 +14,12 @@ model Document {
     expiresAt DateTime
     notes     String?
 
+    fileUrl      String?
+    filePathname String? // Vercel blob pathname
+    fileName     String?
+    fileSize     Int?
+    fileType     String? // mime type
+
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String
 

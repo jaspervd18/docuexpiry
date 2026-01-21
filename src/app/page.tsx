@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { MarketingLanding } from "~/components/marketing-landing";
+import { MarketingLanding } from "~/components/marketing/marketing-landing";
 import { auth } from "~/server/auth";
 
 export default async function IndexPage() {
