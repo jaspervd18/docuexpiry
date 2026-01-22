@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Reveal } from "./reveal";
-
 import { Button } from "~/components/ui/button";
 
 export function MarketingCtaFooter(props: { signInHref: string }) {
@@ -13,8 +12,12 @@ export function MarketingCtaFooter(props: { signInHref: string }) {
   return (
     <section className="mx-auto max-w-6xl px-4 pb-16 sm:pb-20">
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border bg-card p-8 sm:p-10">
+        <div className="relative overflow-hidden rounded-3xl bg-card/80 p-8 shadow-sm backdrop-blur sm:p-10">
           <div className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-28 left-[-80px] h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+
+          <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-border/20" />
+
           <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-2">
               <h3 className="text-xl font-semibold tracking-tight">
@@ -36,8 +39,10 @@ export function MarketingCtaFooter(props: { signInHref: string }) {
         </div>
       </Reveal>
 
-      <footer className="mt-10 border-t pt-8">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-0 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+      <footer className="mt-12 pt-8">
+        <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-border/40 to-transparent" />
+
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <div>© {year} DocuExpiry</div>
           <div className="flex gap-4">
             <a className="hover:text-foreground transition-colors" href="#pricing">

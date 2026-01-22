@@ -74,8 +74,10 @@ export function MarketingPricing(props: { signInHref: string }) {
           </Reveal>
         </div>
 
-        <Reveal className="mt-6 rounded-2xl border bg-card p-5 sm:p-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <Reveal className="relative mt-6 overflow-hidden rounded-3xl bg-card/80 p-5 shadow-sm sm:p-6">
+          <div className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+
+          <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <div className="font-medium">Not sure yet?</div>
               <div className="text-sm text-muted-foreground">
@@ -87,6 +89,7 @@ export function MarketingPricing(props: { signInHref: string }) {
             </Button>
           </div>
         </Reveal>
+
       </RevealStagger>
     </section>
   );

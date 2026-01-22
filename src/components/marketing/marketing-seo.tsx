@@ -32,22 +32,36 @@ export function MarketingSeoBlock() {
           </ul>
         </Reveal>
 
-        <Reveal className="rounded-3xl border bg-card p-6">
-          <div className="text-sm font-medium">Popular use cases</div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <UseCase
-              title="Insurance & certificates"
-              desc="Track renewals for vehicles, equipment, and liability."
-            />
-            <UseCase
-              title="Compliance docs"
-              desc="ISO, safety checks, training, site access permits."
-            />
-            <UseCase
-              title="Client contracts"
-              desc="Know when agreements end or auto-renew."
-            />
-            <UseCase title="Licenses" desc="Professional registrations, permits, and more." />
+        <Reveal className="relative overflow-hidden rounded-3xl bg-card/80 p-6 shadow-sm">
+          {/* soft glow */}
+          <div className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+
+          {/* contrast surface */}
+          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-primary/5" />
+
+          {/* subtle boundary */}
+          <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-border/30" />
+
+          <div className="relative">
+            <div className="text-sm font-medium">Popular use cases</div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <UseCase
+                title="Insurance & certificates"
+                desc="Track renewals for vehicles, equipment, and liability."
+              />
+              <UseCase
+                title="Compliance docs"
+                desc="ISO, safety checks, training, site access permits."
+              />
+              <UseCase
+                title="Client contracts"
+                desc="Know when agreements end or auto-renew."
+              />
+              <UseCase
+                title="Licenses"
+                desc="Professional registrations, permits, and more."
+              />
+            </div>
           </div>
         </Reveal>
       </RevealStagger>
@@ -57,9 +71,10 @@ export function MarketingSeoBlock() {
 
 function UseCase(props: { title: string; desc: string }) {
   return (
-    <div className="rounded-2xl border bg-background/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <div className="rounded-2xl border border-border/40 bg-background/60 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5hover:shadow-md">
       <div className="text-sm font-medium">{props.title}</div>
       <div className="mt-1 text-xs text-muted-foreground">{props.desc}</div>
     </div>
   );
 }
+

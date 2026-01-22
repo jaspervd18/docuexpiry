@@ -2,22 +2,24 @@
 
 import Link from "next/link";
 import { ArrowRight, BellRing, Check, Clock, ShieldCheck } from "lucide-react";
+import { format } from "date-fns";
 
 import { Reveal, RevealStagger } from "./reveal";
 
 import { Button } from "~/components/ui/button";
-import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
+import { DocumentStatusBadge } from "~/components/document-status-badge";
+
 
 export function MarketingHero(props: { signInHref: string }) {
   const { signInHref } = props;
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden mask-[linear-gradient(to_bottom,black_85%,transparent)]">
       {/* pastel blobs */}
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 right-[-120px] h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl" />
+      <div className="pointer-events-none absolute -top-24 left-1/2 h-105 w-105 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -right-30 h-105 w-105 rounded-full bg-primary/10 blur-3xl" />
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -38,7 +40,7 @@ export function MarketingHero(props: { signInHref: string }) {
             <Reveal delay={0.1}>
               <p className="text-pretty text-base text-muted-foreground sm:text-lg">
                 DocuExpiry keeps your certificates, licenses, contracts, and
-                compliance docs organized—then nudges you before they expire.
+                compliance docs organized - then nudges you before they expire.
                 Built for solo operators and small teams.
               </p>
             </Reveal>
@@ -58,7 +60,7 @@ export function MarketingHero(props: { signInHref: string }) {
                 </Button>
 
                 <div className="text-xs text-muted-foreground sm:ml-2">
-                  No credit card • Google sign-in
+                  Start free, no credit card required.
                 </div>
               </div>
             </Reveal>
@@ -68,7 +70,7 @@ export function MarketingHero(props: { signInHref: string }) {
                 <MiniStat
                   icon={<Clock className="h-4 w-4" />}
                   title="2 min setup"
-                  desc="Add a doc + date."
+                  desc="Add a name + date."
                 />
               </Reveal>
               <Reveal>
@@ -90,31 +92,27 @@ export function MarketingHero(props: { signInHref: string }) {
 
           <Reveal delay={0.08} className="relative">
             <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-primary/25 via-primary/10 to-transparent blur-xl" />
-            <Card className="relative overflow-hidden rounded-3xl border bg-card/80 backdrop-blur">
+            <Card className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/80 shadow-sm ring-1 ring-primary/10 backdrop-blur">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   Expirations overview
-                  <Badge variant="outline">Live</Badge>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <DemoRow
                   name="Insurance certificate"
                   meta="Vehicle"
-                  badge="12d left"
-                  tone="warn"
+                  expiresAt={daysFromNow(12)}
                 />
                 <DemoRow
                   name="Safety inspection"
                   meta="Compliance"
-                  badge="Valid"
-                  tone="ok"
+                  expiresAt={daysFromNow(80)}
                 />
                 <DemoRow
                   name="ISO audit report"
                   meta="Compliance"
-                  badge="Expired"
-                  tone="bad"
+                  expiresAt={daysFromNow(-4)}
                 />
                 <Separator />
                 <div className="flex items-center justify-between text-sm">
@@ -142,28 +140,27 @@ function MiniStat(props: { icon: React.ReactNode; title: string; desc: string })
   );
 }
 
-function DemoRow(props: {
-  name: string;
-  meta: string;
-  badge: string;
-  tone: "warn" | "ok" | "bad";
-}) {
-  const badgeClass =
-    props.tone === "bad"
-      ? "bg-destructive text-destructive-foreground"
-      : props.tone === "warn"
-        ? "bg-primary/20 text-foreground"
-        : "bg-muted text-foreground";
-
+function DemoRow(props: { name: string; meta: string; expiresAt: Date }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl border bg-background/70 p-3 transition-all duration-200 hover:shadow-md">
-      <div>
-        <div className="text-sm font-medium">{props.name}</div>
+    <div className="flex items-center justify-between gap-3 rounded-2xl bg-background/40 px-4 py-3 transition-colors hover:bg-primary/5">
+      <div className="min-w-0">
+        <div className="truncate text-sm font-medium">{props.name}</div>
         <div className="text-xs text-muted-foreground">{props.meta}</div>
       </div>
-      <span className={`rounded-full px-3 py-1 text-xs ${badgeClass}`}>
-        {props.badge}
-      </span>
+
+      <div className="flex items-center gap-3">
+        <div className="hidden text-sm text-muted-foreground sm:block">
+          {format(props.expiresAt, "PP")}
+        </div>
+        <DocumentStatusBadge expiresAt={props.expiresAt} />
+      </div>
     </div>
   );
 }
+
+function daysFromNow(days: number) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d;
+}
+

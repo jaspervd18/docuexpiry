@@ -202,7 +202,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\jaspe\\Documents\\Zakelijk\\DocuExpiry\\docuexpiry\\generated\\prisma",
+      "value": "c:\\Users\\jaspe\\Documents\\Zakelijk\\DocuExpiry\\docuexpiry\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -216,7 +216,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\jaspe\\Documents\\Zakelijk\\DocuExpiry\\docuexpiry\\prisma\\schema.prisma",
+    "sourceFilePath": "c:\\Users\\jaspe\\Documents\\Zakelijk\\DocuExpiry\\docuexpiry\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -230,6 +230,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

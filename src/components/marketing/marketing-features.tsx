@@ -26,7 +26,7 @@ export function MarketingFeatures() {
             <FeatureCard
               icon={<Sparkles className="h-5 w-5 text-primary" />}
               title="Quick add"
-              desc="Add a document name, expiry date, category + tags. Upload later if you want."
+              desc="Add a document name and an expiry date, that's it."
             />
           </Reveal>
           <Reveal>

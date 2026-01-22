@@ -19,22 +19,25 @@ export function MarketingFaq() {
         </Reveal>
 
         <Reveal>
-          <Accordion type="single" collapsible className="rounded-2xl border bg-card p-2">
-            <AccordionItem value="item-1">
+          <Accordion
+            type="single"
+            collapsible
+          >
+            <AccordionItem value="item-1" className="rounded-2xl bg-card/80 p-2 shadow-sm ring-1 ring-border/20">
               <AccordionTrigger>Do I need to upload files?</AccordionTrigger>
               <AccordionContent>
                 Nope. Start with name + expiry date. File upload is optional and will be a paid feature later.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-2">
+            <AccordionItem value="item-2" className="rounded-2xl bg-card/80 p-2 shadow-sm ring-1 ring-border/20">
               <AccordionTrigger>How do reminders work?</AccordionTrigger>
               <AccordionContent>
                 You’ll see an “expiring soon” list now. Email reminders can come next once the workflow is solid.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-3">
+            <AccordionItem value="item-3" className="rounded-2xl bg-card/80 p-2 shadow-sm ring-1 ring-border/20">
               <AccordionTrigger>Is Google sign-in free?</AccordionTrigger>
               <AccordionContent>
                 Yes—using Google OAuth via NextAuth is free. You only pay for your hosting and database usage.
