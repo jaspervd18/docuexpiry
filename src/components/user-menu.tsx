@@ -55,6 +55,9 @@ export function UserMenu({ user }: { user: Session["user"] }) {
         <DropdownMenuItem asChild>
           <Link href="/documents">Documents</Link>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/dashboard/settings/notifications">Settings</Link>
+        </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 

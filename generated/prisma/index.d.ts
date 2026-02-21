@@ -53,6 +53,16 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
+/**
+ * Model NotificationSettings
+ * 
+ */
+export type NotificationSettings = $Result.DefaultSelection<Prisma.$NotificationSettingsPayload>
+/**
+ * Model ReminderLog
+ * 
+ */
+export type ReminderLog = $Result.DefaultSelection<Prisma.$ReminderLogPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -251,6 +261,26 @@ export class PrismaClient<
     * ```
     */
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notificationSettings`: Exposes CRUD operations for the **NotificationSettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NotificationSettings
+    * const notificationSettings = await prisma.notificationSettings.findMany()
+    * ```
+    */
+  get notificationSettings(): Prisma.NotificationSettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reminderLog`: Exposes CRUD operations for the **ReminderLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReminderLogs
+    * const reminderLogs = await prisma.reminderLog.findMany()
+    * ```
+    */
+  get reminderLog(): Prisma.ReminderLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -699,7 +729,9 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     User: 'User',
-    VerificationToken: 'VerificationToken'
+    VerificationToken: 'VerificationToken',
+    NotificationSettings: 'NotificationSettings',
+    ReminderLog: 'ReminderLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -718,7 +750,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "document" | "category" | "tag" | "documentTag" | "account" | "session" | "user" | "verificationToken"
+      modelProps: "document" | "category" | "tag" | "documentTag" | "account" | "session" | "user" | "verificationToken" | "notificationSettings" | "reminderLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1314,6 +1346,154 @@ export namespace Prisma {
           }
         }
       }
+      NotificationSettings: {
+        payload: Prisma.$NotificationSettingsPayload<ExtArgs>
+        fields: Prisma.NotificationSettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationSettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationSettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationSettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationSettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationSettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationSettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationSettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationSettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationSettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          update: {
+            args: Prisma.NotificationSettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationSettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationSettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotificationSettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotificationSettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationSettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationSettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotificationSettings>
+          }
+          groupBy: {
+            args: Prisma.NotificationSettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationSettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationSettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReminderLog: {
+        payload: Prisma.$ReminderLogPayload<ExtArgs>
+        fields: Prisma.ReminderLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReminderLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReminderLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>
+          }
+          findFirst: {
+            args: Prisma.ReminderLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReminderLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>
+          }
+          findMany: {
+            args: Prisma.ReminderLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>[]
+          }
+          create: {
+            args: Prisma.ReminderLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>
+          }
+          createMany: {
+            args: Prisma.ReminderLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReminderLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>[]
+          }
+          delete: {
+            args: Prisma.ReminderLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>
+          }
+          update: {
+            args: Prisma.ReminderLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReminderLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReminderLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReminderLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReminderLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReminderLogPayload>
+          }
+          aggregate: {
+            args: Prisma.ReminderLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReminderLog>
+          }
+          groupBy: {
+            args: Prisma.ReminderLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReminderLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReminderLogCountArgs<ExtArgs>
+            result: $Utils.Optional<ReminderLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1418,6 +1598,8 @@ export namespace Prisma {
     session?: SessionOmit
     user?: UserOmit
     verificationToken?: VerificationTokenOmit
+    notificationSettings?: NotificationSettingsOmit
+    reminderLog?: ReminderLogOmit
   }
 
   /* Types for Logging */
@@ -1499,10 +1681,12 @@ export namespace Prisma {
 
   export type DocumentCountOutputType = {
     tags: number
+    reminderLogs: number
   }
 
   export type DocumentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tags?: boolean | DocumentCountOutputTypeCountTagsArgs
+    reminderLogs?: boolean | DocumentCountOutputTypeCountReminderLogsArgs
   }
 
   // Custom InputTypes
@@ -1521,6 +1705,13 @@ export namespace Prisma {
    */
   export type DocumentCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DocumentTagWhereInput
+  }
+
+  /**
+   * DocumentCountOutputType without action
+   */
+  export type DocumentCountOutputTypeCountReminderLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReminderLogWhereInput
   }
 
 
@@ -1596,6 +1787,7 @@ export namespace Prisma {
     documents: number
     categories: number
     tags: number
+    reminderLogs: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1604,6 +1796,7 @@ export namespace Prisma {
     documents?: boolean | UserCountOutputTypeCountDocumentsArgs
     categories?: boolean | UserCountOutputTypeCountCategoriesArgs
     tags?: boolean | UserCountOutputTypeCountTagsArgs
+    reminderLogs?: boolean | UserCountOutputTypeCountReminderLogsArgs
   }
 
   // Custom InputTypes
@@ -1650,6 +1843,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TagWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReminderLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReminderLogWhereInput
   }
 
 
@@ -1922,6 +2122,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Document$categoryArgs<ExtArgs>
     tags?: boolean | Document$tagsArgs<ExtArgs>
+    reminderLogs?: boolean | Document$reminderLogsArgs<ExtArgs>
     _count?: boolean | DocumentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["document"]>
 
@@ -1982,6 +2183,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Document$categoryArgs<ExtArgs>
     tags?: boolean | Document$tagsArgs<ExtArgs>
+    reminderLogs?: boolean | Document$reminderLogsArgs<ExtArgs>
     _count?: boolean | DocumentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DocumentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1999,6 +2201,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       category: Prisma.$CategoryPayload<ExtArgs> | null
       tags: Prisma.$DocumentTagPayload<ExtArgs>[]
+      reminderLogs: Prisma.$ReminderLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2411,6 +2614,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     category<T extends Document$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Document$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     tags<T extends Document$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Document$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reminderLogs<T extends Document$reminderLogsArgs<ExtArgs> = {}>(args?: Subset<T, Document$reminderLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2889,6 +3093,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DocumentTagScalarFieldEnum | DocumentTagScalarFieldEnum[]
+  }
+
+  /**
+   * Document.reminderLogs
+   */
+  export type Document$reminderLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    where?: ReminderLogWhereInput
+    orderBy?: ReminderLogOrderByWithRelationInput | ReminderLogOrderByWithRelationInput[]
+    cursor?: ReminderLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReminderLogScalarFieldEnum | ReminderLogScalarFieldEnum[]
   }
 
   /**
@@ -8501,6 +8729,8 @@ export namespace Prisma {
     documents?: boolean | User$documentsArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
     tags?: boolean | User$tagsArgs<ExtArgs>
+    notificationSettings?: boolean | User$notificationSettingsArgs<ExtArgs>
+    reminderLogs?: boolean | User$reminderLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -8535,6 +8765,8 @@ export namespace Prisma {
     documents?: boolean | User$documentsArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
     tags?: boolean | User$tagsArgs<ExtArgs>
+    notificationSettings?: boolean | User$notificationSettingsArgs<ExtArgs>
+    reminderLogs?: boolean | User$reminderLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8548,6 +8780,8 @@ export namespace Prisma {
       documents: Prisma.$DocumentPayload<ExtArgs>[]
       categories: Prisma.$CategoryPayload<ExtArgs>[]
       tags: Prisma.$TagPayload<ExtArgs>[]
+      notificationSettings: Prisma.$NotificationSettingsPayload<ExtArgs> | null
+      reminderLogs: Prisma.$ReminderLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8954,6 +9188,8 @@ export namespace Prisma {
     documents<T extends User$documentsArgs<ExtArgs> = {}>(args?: Subset<T, User$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends User$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tags<T extends User$tagsArgs<ExtArgs> = {}>(args?: Subset<T, User$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notificationSettings<T extends User$notificationSettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationSettingsArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    reminderLogs<T extends User$reminderLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$reminderLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9493,6 +9729,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * User.notificationSettings
+   */
+  export type User$notificationSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    where?: NotificationSettingsWhereInput
+  }
+
+  /**
+   * User.reminderLogs
+   */
+  export type User$reminderLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    where?: ReminderLogWhereInput
+    orderBy?: ReminderLogOrderByWithRelationInput | ReminderLogOrderByWithRelationInput[]
+    cursor?: ReminderLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReminderLogScalarFieldEnum | ReminderLogScalarFieldEnum[]
   }
 
   /**
@@ -10484,6 +10763,2207 @@ export namespace Prisma {
 
 
   /**
+   * Model NotificationSettings
+   */
+
+  export type AggregateNotificationSettings = {
+    _count: NotificationSettingsCountAggregateOutputType | null
+    _avg: NotificationSettingsAvgAggregateOutputType | null
+    _sum: NotificationSettingsSumAggregateOutputType | null
+    _min: NotificationSettingsMinAggregateOutputType | null
+    _max: NotificationSettingsMaxAggregateOutputType | null
+  }
+
+  export type NotificationSettingsAvgAggregateOutputType = {
+    reminderDays: number | null
+  }
+
+  export type NotificationSettingsSumAggregateOutputType = {
+    reminderDays: number[]
+  }
+
+  export type NotificationSettingsMinAggregateOutputType = {
+    id: string | null
+    emailEnabled: boolean | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NotificationSettingsMaxAggregateOutputType = {
+    id: string | null
+    emailEnabled: boolean | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NotificationSettingsCountAggregateOutputType = {
+    id: number
+    emailEnabled: number
+    reminderDays: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NotificationSettingsAvgAggregateInputType = {
+    reminderDays?: true
+  }
+
+  export type NotificationSettingsSumAggregateInputType = {
+    reminderDays?: true
+  }
+
+  export type NotificationSettingsMinAggregateInputType = {
+    id?: true
+    emailEnabled?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NotificationSettingsMaxAggregateInputType = {
+    id?: true
+    emailEnabled?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NotificationSettingsCountAggregateInputType = {
+    id?: true
+    emailEnabled?: true
+    reminderDays?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NotificationSettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NotificationSettings to aggregate.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NotificationSettings
+    **/
+    _count?: true | NotificationSettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NotificationSettingsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NotificationSettingsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationSettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationSettingsMaxAggregateInputType
+  }
+
+  export type GetNotificationSettingsAggregateType<T extends NotificationSettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotificationSettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotificationSettings[P]>
+      : GetScalarType<T[P], AggregateNotificationSettings[P]>
+  }
+
+
+
+
+  export type NotificationSettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationSettingsWhereInput
+    orderBy?: NotificationSettingsOrderByWithAggregationInput | NotificationSettingsOrderByWithAggregationInput[]
+    by: NotificationSettingsScalarFieldEnum[] | NotificationSettingsScalarFieldEnum
+    having?: NotificationSettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationSettingsCountAggregateInputType | true
+    _avg?: NotificationSettingsAvgAggregateInputType
+    _sum?: NotificationSettingsSumAggregateInputType
+    _min?: NotificationSettingsMinAggregateInputType
+    _max?: NotificationSettingsMaxAggregateInputType
+  }
+
+  export type NotificationSettingsGroupByOutputType = {
+    id: string
+    emailEnabled: boolean
+    reminderDays: number[]
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: NotificationSettingsCountAggregateOutputType | null
+    _avg: NotificationSettingsAvgAggregateOutputType | null
+    _sum: NotificationSettingsSumAggregateOutputType | null
+    _min: NotificationSettingsMinAggregateOutputType | null
+    _max: NotificationSettingsMaxAggregateOutputType | null
+  }
+
+  type GetNotificationSettingsGroupByPayload<T extends NotificationSettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationSettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationSettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationSettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationSettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationSettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    emailEnabled?: boolean
+    reminderDays?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationSettings"]>
+
+  export type NotificationSettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    emailEnabled?: boolean
+    reminderDays?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationSettings"]>
+
+  export type NotificationSettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    emailEnabled?: boolean
+    reminderDays?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notificationSettings"]>
+
+  export type NotificationSettingsSelectScalar = {
+    id?: boolean
+    emailEnabled?: boolean
+    reminderDays?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type NotificationSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "emailEnabled" | "reminderDays" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["notificationSettings"]>
+  export type NotificationSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotificationSettingsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotificationSettingsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NotificationSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NotificationSettings"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      emailEnabled: boolean
+      reminderDays: number[]
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["notificationSettings"]>
+    composites: {}
+  }
+
+  type NotificationSettingsGetPayload<S extends boolean | null | undefined | NotificationSettingsDefaultArgs> = $Result.GetResult<Prisma.$NotificationSettingsPayload, S>
+
+  type NotificationSettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationSettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationSettingsCountAggregateInputType | true
+    }
+
+  export interface NotificationSettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NotificationSettings'], meta: { name: 'NotificationSettings' } }
+    /**
+     * Find zero or one NotificationSettings that matches the filter.
+     * @param {NotificationSettingsFindUniqueArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationSettingsFindUniqueArgs>(args: SelectSubset<T, NotificationSettingsFindUniqueArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NotificationSettings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationSettingsFindUniqueOrThrowArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationSettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationSettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NotificationSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsFindFirstArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationSettingsFindFirstArgs>(args?: SelectSubset<T, NotificationSettingsFindFirstArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NotificationSettings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsFindFirstOrThrowArgs} args - Arguments to find a NotificationSettings
+     * @example
+     * // Get one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationSettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationSettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NotificationSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findMany()
+     * 
+     * // Get first 10 NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const notificationSettingsWithIdOnly = await prisma.notificationSettings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NotificationSettingsFindManyArgs>(args?: SelectSubset<T, NotificationSettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NotificationSettings.
+     * @param {NotificationSettingsCreateArgs} args - Arguments to create a NotificationSettings.
+     * @example
+     * // Create one NotificationSettings
+     * const NotificationSettings = await prisma.notificationSettings.create({
+     *   data: {
+     *     // ... data to create a NotificationSettings
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationSettingsCreateArgs>(args: SelectSubset<T, NotificationSettingsCreateArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NotificationSettings.
+     * @param {NotificationSettingsCreateManyArgs} args - Arguments to create many NotificationSettings.
+     * @example
+     * // Create many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationSettingsCreateManyArgs>(args?: SelectSubset<T, NotificationSettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NotificationSettings and returns the data saved in the database.
+     * @param {NotificationSettingsCreateManyAndReturnArgs} args - Arguments to create many NotificationSettings.
+     * @example
+     * // Create many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NotificationSettings and only return the `id`
+     * const notificationSettingsWithIdOnly = await prisma.notificationSettings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationSettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationSettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NotificationSettings.
+     * @param {NotificationSettingsDeleteArgs} args - Arguments to delete one NotificationSettings.
+     * @example
+     * // Delete one NotificationSettings
+     * const NotificationSettings = await prisma.notificationSettings.delete({
+     *   where: {
+     *     // ... filter to delete one NotificationSettings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationSettingsDeleteArgs>(args: SelectSubset<T, NotificationSettingsDeleteArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NotificationSettings.
+     * @param {NotificationSettingsUpdateArgs} args - Arguments to update one NotificationSettings.
+     * @example
+     * // Update one NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationSettingsUpdateArgs>(args: SelectSubset<T, NotificationSettingsUpdateArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NotificationSettings.
+     * @param {NotificationSettingsDeleteManyArgs} args - Arguments to filter NotificationSettings to delete.
+     * @example
+     * // Delete a few NotificationSettings
+     * const { count } = await prisma.notificationSettings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationSettingsDeleteManyArgs>(args?: SelectSubset<T, NotificationSettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationSettingsUpdateManyArgs>(args: SelectSubset<T, NotificationSettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NotificationSettings and returns the data updated in the database.
+     * @param {NotificationSettingsUpdateManyAndReturnArgs} args - Arguments to update many NotificationSettings.
+     * @example
+     * // Update many NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NotificationSettings and only return the `id`
+     * const notificationSettingsWithIdOnly = await prisma.notificationSettings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotificationSettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, NotificationSettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NotificationSettings.
+     * @param {NotificationSettingsUpsertArgs} args - Arguments to update or create a NotificationSettings.
+     * @example
+     * // Update or create a NotificationSettings
+     * const notificationSettings = await prisma.notificationSettings.upsert({
+     *   create: {
+     *     // ... data to create a NotificationSettings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NotificationSettings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationSettingsUpsertArgs>(args: SelectSubset<T, NotificationSettingsUpsertArgs<ExtArgs>>): Prisma__NotificationSettingsClient<$Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsCountArgs} args - Arguments to filter NotificationSettings to count.
+     * @example
+     * // Count the number of NotificationSettings
+     * const count = await prisma.notificationSettings.count({
+     *   where: {
+     *     // ... the filter for the NotificationSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationSettingsCountArgs>(
+      args?: Subset<T, NotificationSettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationSettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationSettingsAggregateArgs>(args: Subset<T, NotificationSettingsAggregateArgs>): Prisma.PrismaPromise<GetNotificationSettingsAggregateType<T>>
+
+    /**
+     * Group by NotificationSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationSettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationSettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationSettingsGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationSettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationSettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationSettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NotificationSettings model
+   */
+  readonly fields: NotificationSettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NotificationSettings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationSettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NotificationSettings model
+   */
+  interface NotificationSettingsFieldRefs {
+    readonly id: FieldRef<"NotificationSettings", 'String'>
+    readonly emailEnabled: FieldRef<"NotificationSettings", 'Boolean'>
+    readonly reminderDays: FieldRef<"NotificationSettings", 'Int[]'>
+    readonly userId: FieldRef<"NotificationSettings", 'String'>
+    readonly createdAt: FieldRef<"NotificationSettings", 'DateTime'>
+    readonly updatedAt: FieldRef<"NotificationSettings", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NotificationSettings findUnique
+   */
+  export type NotificationSettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings findUniqueOrThrow
+   */
+  export type NotificationSettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings findFirst
+   */
+  export type NotificationSettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NotificationSettings.
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NotificationSettings.
+     */
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationSettings findFirstOrThrow
+   */
+  export type NotificationSettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NotificationSettings.
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NotificationSettings.
+     */
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationSettings findMany
+   */
+  export type NotificationSettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which NotificationSettings to fetch.
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NotificationSettings to fetch.
+     */
+    orderBy?: NotificationSettingsOrderByWithRelationInput | NotificationSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NotificationSettings.
+     */
+    cursor?: NotificationSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NotificationSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NotificationSettings.
+     */
+    skip?: number
+    distinct?: NotificationSettingsScalarFieldEnum | NotificationSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * NotificationSettings create
+   */
+  export type NotificationSettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NotificationSettings.
+     */
+    data: XOR<NotificationSettingsCreateInput, NotificationSettingsUncheckedCreateInput>
+  }
+
+  /**
+   * NotificationSettings createMany
+   */
+  export type NotificationSettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NotificationSettings.
+     */
+    data: NotificationSettingsCreateManyInput | NotificationSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NotificationSettings createManyAndReturn
+   */
+  export type NotificationSettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many NotificationSettings.
+     */
+    data: NotificationSettingsCreateManyInput | NotificationSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NotificationSettings update
+   */
+  export type NotificationSettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NotificationSettings.
+     */
+    data: XOR<NotificationSettingsUpdateInput, NotificationSettingsUncheckedUpdateInput>
+    /**
+     * Choose, which NotificationSettings to update.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings updateMany
+   */
+  export type NotificationSettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NotificationSettings.
+     */
+    data: XOR<NotificationSettingsUpdateManyMutationInput, NotificationSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which NotificationSettings to update
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * Limit how many NotificationSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NotificationSettings updateManyAndReturn
+   */
+  export type NotificationSettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to update NotificationSettings.
+     */
+    data: XOR<NotificationSettingsUpdateManyMutationInput, NotificationSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which NotificationSettings to update
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * Limit how many NotificationSettings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NotificationSettings upsert
+   */
+  export type NotificationSettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NotificationSettings to update in case it exists.
+     */
+    where: NotificationSettingsWhereUniqueInput
+    /**
+     * In case the NotificationSettings found by the `where` argument doesn't exist, create a new NotificationSettings with this data.
+     */
+    create: XOR<NotificationSettingsCreateInput, NotificationSettingsUncheckedCreateInput>
+    /**
+     * In case the NotificationSettings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationSettingsUpdateInput, NotificationSettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * NotificationSettings delete
+   */
+  export type NotificationSettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+    /**
+     * Filter which NotificationSettings to delete.
+     */
+    where: NotificationSettingsWhereUniqueInput
+  }
+
+  /**
+   * NotificationSettings deleteMany
+   */
+  export type NotificationSettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NotificationSettings to delete
+     */
+    where?: NotificationSettingsWhereInput
+    /**
+     * Limit how many NotificationSettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NotificationSettings without action
+   */
+  export type NotificationSettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NotificationSettings
+     */
+    select?: NotificationSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NotificationSettings
+     */
+    omit?: NotificationSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReminderLog
+   */
+
+  export type AggregateReminderLog = {
+    _count: ReminderLogCountAggregateOutputType | null
+    _avg: ReminderLogAvgAggregateOutputType | null
+    _sum: ReminderLogSumAggregateOutputType | null
+    _min: ReminderLogMinAggregateOutputType | null
+    _max: ReminderLogMaxAggregateOutputType | null
+  }
+
+  export type ReminderLogAvgAggregateOutputType = {
+    daysBeforeExpiry: number | null
+  }
+
+  export type ReminderLogSumAggregateOutputType = {
+    daysBeforeExpiry: number | null
+  }
+
+  export type ReminderLogMinAggregateOutputType = {
+    id: string | null
+    daysBeforeExpiry: number | null
+    sentAt: Date | null
+    documentId: string | null
+    userId: string | null
+  }
+
+  export type ReminderLogMaxAggregateOutputType = {
+    id: string | null
+    daysBeforeExpiry: number | null
+    sentAt: Date | null
+    documentId: string | null
+    userId: string | null
+  }
+
+  export type ReminderLogCountAggregateOutputType = {
+    id: number
+    daysBeforeExpiry: number
+    sentAt: number
+    documentId: number
+    userId: number
+    _all: number
+  }
+
+
+  export type ReminderLogAvgAggregateInputType = {
+    daysBeforeExpiry?: true
+  }
+
+  export type ReminderLogSumAggregateInputType = {
+    daysBeforeExpiry?: true
+  }
+
+  export type ReminderLogMinAggregateInputType = {
+    id?: true
+    daysBeforeExpiry?: true
+    sentAt?: true
+    documentId?: true
+    userId?: true
+  }
+
+  export type ReminderLogMaxAggregateInputType = {
+    id?: true
+    daysBeforeExpiry?: true
+    sentAt?: true
+    documentId?: true
+    userId?: true
+  }
+
+  export type ReminderLogCountAggregateInputType = {
+    id?: true
+    daysBeforeExpiry?: true
+    sentAt?: true
+    documentId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type ReminderLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReminderLog to aggregate.
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReminderLogs to fetch.
+     */
+    orderBy?: ReminderLogOrderByWithRelationInput | ReminderLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReminderLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReminderLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReminderLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReminderLogs
+    **/
+    _count?: true | ReminderLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReminderLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReminderLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReminderLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReminderLogMaxAggregateInputType
+  }
+
+  export type GetReminderLogAggregateType<T extends ReminderLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateReminderLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReminderLog[P]>
+      : GetScalarType<T[P], AggregateReminderLog[P]>
+  }
+
+
+
+
+  export type ReminderLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReminderLogWhereInput
+    orderBy?: ReminderLogOrderByWithAggregationInput | ReminderLogOrderByWithAggregationInput[]
+    by: ReminderLogScalarFieldEnum[] | ReminderLogScalarFieldEnum
+    having?: ReminderLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReminderLogCountAggregateInputType | true
+    _avg?: ReminderLogAvgAggregateInputType
+    _sum?: ReminderLogSumAggregateInputType
+    _min?: ReminderLogMinAggregateInputType
+    _max?: ReminderLogMaxAggregateInputType
+  }
+
+  export type ReminderLogGroupByOutputType = {
+    id: string
+    daysBeforeExpiry: number
+    sentAt: Date
+    documentId: string
+    userId: string
+    _count: ReminderLogCountAggregateOutputType | null
+    _avg: ReminderLogAvgAggregateOutputType | null
+    _sum: ReminderLogSumAggregateOutputType | null
+    _min: ReminderLogMinAggregateOutputType | null
+    _max: ReminderLogMaxAggregateOutputType | null
+  }
+
+  type GetReminderLogGroupByPayload<T extends ReminderLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReminderLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReminderLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReminderLogGroupByOutputType[P]>
+            : GetScalarType<T[P], ReminderLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReminderLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    daysBeforeExpiry?: boolean
+    sentAt?: boolean
+    documentId?: boolean
+    userId?: boolean
+    document?: boolean | DocumentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reminderLog"]>
+
+  export type ReminderLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    daysBeforeExpiry?: boolean
+    sentAt?: boolean
+    documentId?: boolean
+    userId?: boolean
+    document?: boolean | DocumentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reminderLog"]>
+
+  export type ReminderLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    daysBeforeExpiry?: boolean
+    sentAt?: boolean
+    documentId?: boolean
+    userId?: boolean
+    document?: boolean | DocumentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reminderLog"]>
+
+  export type ReminderLogSelectScalar = {
+    id?: boolean
+    daysBeforeExpiry?: boolean
+    sentAt?: boolean
+    documentId?: boolean
+    userId?: boolean
+  }
+
+  export type ReminderLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "daysBeforeExpiry" | "sentAt" | "documentId" | "userId", ExtArgs["result"]["reminderLog"]>
+  export type ReminderLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    document?: boolean | DocumentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReminderLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    document?: boolean | DocumentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReminderLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    document?: boolean | DocumentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ReminderLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReminderLog"
+    objects: {
+      document: Prisma.$DocumentPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      daysBeforeExpiry: number
+      sentAt: Date
+      documentId: string
+      userId: string
+    }, ExtArgs["result"]["reminderLog"]>
+    composites: {}
+  }
+
+  type ReminderLogGetPayload<S extends boolean | null | undefined | ReminderLogDefaultArgs> = $Result.GetResult<Prisma.$ReminderLogPayload, S>
+
+  type ReminderLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReminderLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReminderLogCountAggregateInputType | true
+    }
+
+  export interface ReminderLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReminderLog'], meta: { name: 'ReminderLog' } }
+    /**
+     * Find zero or one ReminderLog that matches the filter.
+     * @param {ReminderLogFindUniqueArgs} args - Arguments to find a ReminderLog
+     * @example
+     * // Get one ReminderLog
+     * const reminderLog = await prisma.reminderLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReminderLogFindUniqueArgs>(args: SelectSubset<T, ReminderLogFindUniqueArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReminderLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReminderLogFindUniqueOrThrowArgs} args - Arguments to find a ReminderLog
+     * @example
+     * // Get one ReminderLog
+     * const reminderLog = await prisma.reminderLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReminderLogFindUniqueOrThrowArgs>(args: SelectSubset<T, ReminderLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReminderLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogFindFirstArgs} args - Arguments to find a ReminderLog
+     * @example
+     * // Get one ReminderLog
+     * const reminderLog = await prisma.reminderLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReminderLogFindFirstArgs>(args?: SelectSubset<T, ReminderLogFindFirstArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReminderLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogFindFirstOrThrowArgs} args - Arguments to find a ReminderLog
+     * @example
+     * // Get one ReminderLog
+     * const reminderLog = await prisma.reminderLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReminderLogFindFirstOrThrowArgs>(args?: SelectSubset<T, ReminderLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReminderLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReminderLogs
+     * const reminderLogs = await prisma.reminderLog.findMany()
+     * 
+     * // Get first 10 ReminderLogs
+     * const reminderLogs = await prisma.reminderLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reminderLogWithIdOnly = await prisma.reminderLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReminderLogFindManyArgs>(args?: SelectSubset<T, ReminderLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReminderLog.
+     * @param {ReminderLogCreateArgs} args - Arguments to create a ReminderLog.
+     * @example
+     * // Create one ReminderLog
+     * const ReminderLog = await prisma.reminderLog.create({
+     *   data: {
+     *     // ... data to create a ReminderLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReminderLogCreateArgs>(args: SelectSubset<T, ReminderLogCreateArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReminderLogs.
+     * @param {ReminderLogCreateManyArgs} args - Arguments to create many ReminderLogs.
+     * @example
+     * // Create many ReminderLogs
+     * const reminderLog = await prisma.reminderLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReminderLogCreateManyArgs>(args?: SelectSubset<T, ReminderLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReminderLogs and returns the data saved in the database.
+     * @param {ReminderLogCreateManyAndReturnArgs} args - Arguments to create many ReminderLogs.
+     * @example
+     * // Create many ReminderLogs
+     * const reminderLog = await prisma.reminderLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReminderLogs and only return the `id`
+     * const reminderLogWithIdOnly = await prisma.reminderLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReminderLogCreateManyAndReturnArgs>(args?: SelectSubset<T, ReminderLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReminderLog.
+     * @param {ReminderLogDeleteArgs} args - Arguments to delete one ReminderLog.
+     * @example
+     * // Delete one ReminderLog
+     * const ReminderLog = await prisma.reminderLog.delete({
+     *   where: {
+     *     // ... filter to delete one ReminderLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReminderLogDeleteArgs>(args: SelectSubset<T, ReminderLogDeleteArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReminderLog.
+     * @param {ReminderLogUpdateArgs} args - Arguments to update one ReminderLog.
+     * @example
+     * // Update one ReminderLog
+     * const reminderLog = await prisma.reminderLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReminderLogUpdateArgs>(args: SelectSubset<T, ReminderLogUpdateArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReminderLogs.
+     * @param {ReminderLogDeleteManyArgs} args - Arguments to filter ReminderLogs to delete.
+     * @example
+     * // Delete a few ReminderLogs
+     * const { count } = await prisma.reminderLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReminderLogDeleteManyArgs>(args?: SelectSubset<T, ReminderLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReminderLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReminderLogs
+     * const reminderLog = await prisma.reminderLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReminderLogUpdateManyArgs>(args: SelectSubset<T, ReminderLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReminderLogs and returns the data updated in the database.
+     * @param {ReminderLogUpdateManyAndReturnArgs} args - Arguments to update many ReminderLogs.
+     * @example
+     * // Update many ReminderLogs
+     * const reminderLog = await prisma.reminderLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReminderLogs and only return the `id`
+     * const reminderLogWithIdOnly = await prisma.reminderLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReminderLogUpdateManyAndReturnArgs>(args: SelectSubset<T, ReminderLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReminderLog.
+     * @param {ReminderLogUpsertArgs} args - Arguments to update or create a ReminderLog.
+     * @example
+     * // Update or create a ReminderLog
+     * const reminderLog = await prisma.reminderLog.upsert({
+     *   create: {
+     *     // ... data to create a ReminderLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReminderLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReminderLogUpsertArgs>(args: SelectSubset<T, ReminderLogUpsertArgs<ExtArgs>>): Prisma__ReminderLogClient<$Result.GetResult<Prisma.$ReminderLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReminderLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogCountArgs} args - Arguments to filter ReminderLogs to count.
+     * @example
+     * // Count the number of ReminderLogs
+     * const count = await prisma.reminderLog.count({
+     *   where: {
+     *     // ... the filter for the ReminderLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReminderLogCountArgs>(
+      args?: Subset<T, ReminderLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReminderLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReminderLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReminderLogAggregateArgs>(args: Subset<T, ReminderLogAggregateArgs>): Prisma.PrismaPromise<GetReminderLogAggregateType<T>>
+
+    /**
+     * Group by ReminderLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReminderLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReminderLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReminderLogGroupByArgs['orderBy'] }
+        : { orderBy?: ReminderLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReminderLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReminderLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReminderLog model
+   */
+  readonly fields: ReminderLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReminderLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReminderLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    document<T extends DocumentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DocumentDefaultArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReminderLog model
+   */
+  interface ReminderLogFieldRefs {
+    readonly id: FieldRef<"ReminderLog", 'String'>
+    readonly daysBeforeExpiry: FieldRef<"ReminderLog", 'Int'>
+    readonly sentAt: FieldRef<"ReminderLog", 'DateTime'>
+    readonly documentId: FieldRef<"ReminderLog", 'String'>
+    readonly userId: FieldRef<"ReminderLog", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReminderLog findUnique
+   */
+  export type ReminderLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ReminderLog to fetch.
+     */
+    where: ReminderLogWhereUniqueInput
+  }
+
+  /**
+   * ReminderLog findUniqueOrThrow
+   */
+  export type ReminderLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ReminderLog to fetch.
+     */
+    where: ReminderLogWhereUniqueInput
+  }
+
+  /**
+   * ReminderLog findFirst
+   */
+  export type ReminderLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ReminderLog to fetch.
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReminderLogs to fetch.
+     */
+    orderBy?: ReminderLogOrderByWithRelationInput | ReminderLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReminderLogs.
+     */
+    cursor?: ReminderLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReminderLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReminderLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReminderLogs.
+     */
+    distinct?: ReminderLogScalarFieldEnum | ReminderLogScalarFieldEnum[]
+  }
+
+  /**
+   * ReminderLog findFirstOrThrow
+   */
+  export type ReminderLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ReminderLog to fetch.
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReminderLogs to fetch.
+     */
+    orderBy?: ReminderLogOrderByWithRelationInput | ReminderLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReminderLogs.
+     */
+    cursor?: ReminderLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReminderLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReminderLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReminderLogs.
+     */
+    distinct?: ReminderLogScalarFieldEnum | ReminderLogScalarFieldEnum[]
+  }
+
+  /**
+   * ReminderLog findMany
+   */
+  export type ReminderLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ReminderLogs to fetch.
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReminderLogs to fetch.
+     */
+    orderBy?: ReminderLogOrderByWithRelationInput | ReminderLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReminderLogs.
+     */
+    cursor?: ReminderLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReminderLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReminderLogs.
+     */
+    skip?: number
+    distinct?: ReminderLogScalarFieldEnum | ReminderLogScalarFieldEnum[]
+  }
+
+  /**
+   * ReminderLog create
+   */
+  export type ReminderLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReminderLog.
+     */
+    data: XOR<ReminderLogCreateInput, ReminderLogUncheckedCreateInput>
+  }
+
+  /**
+   * ReminderLog createMany
+   */
+  export type ReminderLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReminderLogs.
+     */
+    data: ReminderLogCreateManyInput | ReminderLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReminderLog createManyAndReturn
+   */
+  export type ReminderLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReminderLogs.
+     */
+    data: ReminderLogCreateManyInput | ReminderLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReminderLog update
+   */
+  export type ReminderLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReminderLog.
+     */
+    data: XOR<ReminderLogUpdateInput, ReminderLogUncheckedUpdateInput>
+    /**
+     * Choose, which ReminderLog to update.
+     */
+    where: ReminderLogWhereUniqueInput
+  }
+
+  /**
+   * ReminderLog updateMany
+   */
+  export type ReminderLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReminderLogs.
+     */
+    data: XOR<ReminderLogUpdateManyMutationInput, ReminderLogUncheckedUpdateManyInput>
+    /**
+     * Filter which ReminderLogs to update
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * Limit how many ReminderLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReminderLog updateManyAndReturn
+   */
+  export type ReminderLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * The data used to update ReminderLogs.
+     */
+    data: XOR<ReminderLogUpdateManyMutationInput, ReminderLogUncheckedUpdateManyInput>
+    /**
+     * Filter which ReminderLogs to update
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * Limit how many ReminderLogs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReminderLog upsert
+   */
+  export type ReminderLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReminderLog to update in case it exists.
+     */
+    where: ReminderLogWhereUniqueInput
+    /**
+     * In case the ReminderLog found by the `where` argument doesn't exist, create a new ReminderLog with this data.
+     */
+    create: XOR<ReminderLogCreateInput, ReminderLogUncheckedCreateInput>
+    /**
+     * In case the ReminderLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReminderLogUpdateInput, ReminderLogUncheckedUpdateInput>
+  }
+
+  /**
+   * ReminderLog delete
+   */
+  export type ReminderLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+    /**
+     * Filter which ReminderLog to delete.
+     */
+    where: ReminderLogWhereUniqueInput
+  }
+
+  /**
+   * ReminderLog deleteMany
+   */
+  export type ReminderLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReminderLogs to delete
+     */
+    where?: ReminderLogWhereInput
+    /**
+     * Limit how many ReminderLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReminderLog without action
+   */
+  export type ReminderLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReminderLog
+     */
+    select?: ReminderLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReminderLog
+     */
+    omit?: ReminderLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReminderLogInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10593,6 +13073,29 @@ export namespace Prisma {
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
+  export const NotificationSettingsScalarFieldEnum: {
+    id: 'id',
+    emailEnabled: 'emailEnabled',
+    reminderDays: 'reminderDays',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NotificationSettingsScalarFieldEnum = (typeof NotificationSettingsScalarFieldEnum)[keyof typeof NotificationSettingsScalarFieldEnum]
+
+
+  export const ReminderLogScalarFieldEnum: {
+    id: 'id',
+    daysBeforeExpiry: 'daysBeforeExpiry',
+    sentAt: 'sentAt',
+    documentId: 'documentId',
+    userId: 'userId'
+  };
+
+  export type ReminderLogScalarFieldEnum = (typeof ReminderLogScalarFieldEnum)[keyof typeof ReminderLogScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -10665,6 +13168,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10701,6 +13211,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     tags?: DocumentTagListRelationFilter
+    reminderLogs?: ReminderLogListRelationFilter
   }
 
   export type DocumentOrderByWithRelationInput = {
@@ -10720,6 +13231,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     category?: CategoryOrderByWithRelationInput
     tags?: DocumentTagOrderByRelationAggregateInput
+    reminderLogs?: ReminderLogOrderByRelationAggregateInput
   }
 
   export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -10742,6 +13254,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     tags?: DocumentTagListRelationFilter
+    reminderLogs?: ReminderLogListRelationFilter
   }, "id">
 
   export type DocumentOrderByWithAggregationInput = {
@@ -11098,6 +13611,8 @@ export namespace Prisma {
     documents?: DocumentListRelationFilter
     categories?: CategoryListRelationFilter
     tags?: TagListRelationFilter
+    notificationSettings?: XOR<NotificationSettingsNullableScalarRelationFilter, NotificationSettingsWhereInput> | null
+    reminderLogs?: ReminderLogListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11111,6 +13626,8 @@ export namespace Prisma {
     documents?: DocumentOrderByRelationAggregateInput
     categories?: CategoryOrderByRelationAggregateInput
     tags?: TagOrderByRelationAggregateInput
+    notificationSettings?: NotificationSettingsOrderByWithRelationInput
+    reminderLogs?: ReminderLogOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11127,6 +13644,8 @@ export namespace Prisma {
     documents?: DocumentListRelationFilter
     categories?: CategoryListRelationFilter
     tags?: TagListRelationFilter
+    notificationSettings?: XOR<NotificationSettingsNullableScalarRelationFilter, NotificationSettingsWhereInput> | null
+    reminderLogs?: ReminderLogListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -11194,6 +13713,129 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
+  export type NotificationSettingsWhereInput = {
+    AND?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    OR?: NotificationSettingsWhereInput[]
+    NOT?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    id?: StringFilter<"NotificationSettings"> | string
+    emailEnabled?: BoolFilter<"NotificationSettings"> | boolean
+    reminderDays?: IntNullableListFilter<"NotificationSettings">
+    userId?: StringFilter<"NotificationSettings"> | string
+    createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+    updatedAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type NotificationSettingsOrderByWithRelationInput = {
+    id?: SortOrder
+    emailEnabled?: SortOrder
+    reminderDays?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type NotificationSettingsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    OR?: NotificationSettingsWhereInput[]
+    NOT?: NotificationSettingsWhereInput | NotificationSettingsWhereInput[]
+    emailEnabled?: BoolFilter<"NotificationSettings"> | boolean
+    reminderDays?: IntNullableListFilter<"NotificationSettings">
+    createdAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+    updatedAt?: DateTimeFilter<"NotificationSettings"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type NotificationSettingsOrderByWithAggregationInput = {
+    id?: SortOrder
+    emailEnabled?: SortOrder
+    reminderDays?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: NotificationSettingsCountOrderByAggregateInput
+    _avg?: NotificationSettingsAvgOrderByAggregateInput
+    _max?: NotificationSettingsMaxOrderByAggregateInput
+    _min?: NotificationSettingsMinOrderByAggregateInput
+    _sum?: NotificationSettingsSumOrderByAggregateInput
+  }
+
+  export type NotificationSettingsScalarWhereWithAggregatesInput = {
+    AND?: NotificationSettingsScalarWhereWithAggregatesInput | NotificationSettingsScalarWhereWithAggregatesInput[]
+    OR?: NotificationSettingsScalarWhereWithAggregatesInput[]
+    NOT?: NotificationSettingsScalarWhereWithAggregatesInput | NotificationSettingsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NotificationSettings"> | string
+    emailEnabled?: BoolWithAggregatesFilter<"NotificationSettings"> | boolean
+    reminderDays?: IntNullableListFilter<"NotificationSettings">
+    userId?: StringWithAggregatesFilter<"NotificationSettings"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"NotificationSettings"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"NotificationSettings"> | Date | string
+  }
+
+  export type ReminderLogWhereInput = {
+    AND?: ReminderLogWhereInput | ReminderLogWhereInput[]
+    OR?: ReminderLogWhereInput[]
+    NOT?: ReminderLogWhereInput | ReminderLogWhereInput[]
+    id?: StringFilter<"ReminderLog"> | string
+    daysBeforeExpiry?: IntFilter<"ReminderLog"> | number
+    sentAt?: DateTimeFilter<"ReminderLog"> | Date | string
+    documentId?: StringFilter<"ReminderLog"> | string
+    userId?: StringFilter<"ReminderLog"> | string
+    document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ReminderLogOrderByWithRelationInput = {
+    id?: SortOrder
+    daysBeforeExpiry?: SortOrder
+    sentAt?: SortOrder
+    documentId?: SortOrder
+    userId?: SortOrder
+    document?: DocumentOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ReminderLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    documentId_daysBeforeExpiry?: ReminderLogDocumentIdDaysBeforeExpiryCompoundUniqueInput
+    AND?: ReminderLogWhereInput | ReminderLogWhereInput[]
+    OR?: ReminderLogWhereInput[]
+    NOT?: ReminderLogWhereInput | ReminderLogWhereInput[]
+    daysBeforeExpiry?: IntFilter<"ReminderLog"> | number
+    sentAt?: DateTimeFilter<"ReminderLog"> | Date | string
+    documentId?: StringFilter<"ReminderLog"> | string
+    userId?: StringFilter<"ReminderLog"> | string
+    document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "documentId_daysBeforeExpiry">
+
+  export type ReminderLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    daysBeforeExpiry?: SortOrder
+    sentAt?: SortOrder
+    documentId?: SortOrder
+    userId?: SortOrder
+    _count?: ReminderLogCountOrderByAggregateInput
+    _avg?: ReminderLogAvgOrderByAggregateInput
+    _max?: ReminderLogMaxOrderByAggregateInput
+    _min?: ReminderLogMinOrderByAggregateInput
+    _sum?: ReminderLogSumOrderByAggregateInput
+  }
+
+  export type ReminderLogScalarWhereWithAggregatesInput = {
+    AND?: ReminderLogScalarWhereWithAggregatesInput | ReminderLogScalarWhereWithAggregatesInput[]
+    OR?: ReminderLogScalarWhereWithAggregatesInput[]
+    NOT?: ReminderLogScalarWhereWithAggregatesInput | ReminderLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReminderLog"> | string
+    daysBeforeExpiry?: IntWithAggregatesFilter<"ReminderLog"> | number
+    sentAt?: DateTimeWithAggregatesFilter<"ReminderLog"> | Date | string
+    documentId?: StringWithAggregatesFilter<"ReminderLog"> | string
+    userId?: StringWithAggregatesFilter<"ReminderLog"> | string
+  }
+
   export type DocumentCreateInput = {
     id?: string
     name: string
@@ -11209,6 +13851,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutDocumentsInput
     category?: CategoryCreateNestedOneWithoutDocumentsInput
     tags?: DocumentTagCreateNestedManyWithoutDocumentInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentUncheckedCreateInput = {
@@ -11226,6 +13869,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentUpdateInput = {
@@ -11243,6 +13887,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
     category?: CategoryUpdateOneWithoutDocumentsNestedInput
     tags?: DocumentTagUpdateManyWithoutDocumentNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentUncheckedUpdateInput = {
@@ -11260,6 +13905,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentCreateManyInput = {
@@ -11616,6 +14262,8 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutUserInput
     categories?: CategoryCreateNestedManyWithoutUserInput
     tags?: TagCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11629,6 +14277,8 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
     tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11642,6 +14292,8 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutUserNestedInput
     categories?: CategoryUpdateManyWithoutUserNestedInput
     tags?: TagUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11655,6 +14307,8 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
     tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11721,6 +14375,122 @@ export namespace Prisma {
     identifier?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsCreateInput = {
+    id?: string
+    emailEnabled?: boolean
+    reminderDays?: NotificationSettingsCreatereminderDaysInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutNotificationSettingsInput
+  }
+
+  export type NotificationSettingsUncheckedCreateInput = {
+    id?: string
+    emailEnabled?: boolean
+    reminderDays?: NotificationSettingsCreatereminderDaysInput | number[]
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationSettingsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailEnabled?: BoolFieldUpdateOperationsInput | boolean
+    reminderDays?: NotificationSettingsUpdatereminderDaysInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNotificationSettingsNestedInput
+  }
+
+  export type NotificationSettingsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailEnabled?: BoolFieldUpdateOperationsInput | boolean
+    reminderDays?: NotificationSettingsUpdatereminderDaysInput | number[]
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsCreateManyInput = {
+    id?: string
+    emailEnabled?: boolean
+    reminderDays?: NotificationSettingsCreatereminderDaysInput | number[]
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationSettingsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailEnabled?: BoolFieldUpdateOperationsInput | boolean
+    reminderDays?: NotificationSettingsUpdatereminderDaysInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailEnabled?: BoolFieldUpdateOperationsInput | boolean
+    reminderDays?: NotificationSettingsUpdatereminderDaysInput | number[]
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReminderLogCreateInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    document: DocumentCreateNestedOneWithoutReminderLogsInput
+    user: UserCreateNestedOneWithoutReminderLogsInput
+  }
+
+  export type ReminderLogUncheckedCreateInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    documentId: string
+    userId: string
+  }
+
+  export type ReminderLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    document?: DocumentUpdateOneRequiredWithoutReminderLogsNestedInput
+    user?: UserUpdateOneRequiredWithoutReminderLogsNestedInput
+  }
+
+  export type ReminderLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReminderLogCreateManyInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    documentId: string
+    userId: string
+  }
+
+  export type ReminderLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReminderLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -11791,12 +14561,22 @@ export namespace Prisma {
     none?: DocumentTagWhereInput
   }
 
+  export type ReminderLogListRelationFilter = {
+    every?: ReminderLogWhereInput
+    some?: ReminderLogWhereInput
+    none?: ReminderLogWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type DocumentTagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReminderLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12133,6 +14913,11 @@ export namespace Prisma {
     none?: TagWhereInput
   }
 
+  export type NotificationSettingsNullableScalarRelationFilter = {
+    is?: NotificationSettingsWhereInput | null
+    isNot?: NotificationSettingsWhereInput | null
+  }
+
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -12210,6 +14995,124 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type NotificationSettingsCountOrderByAggregateInput = {
+    id?: SortOrder
+    emailEnabled?: SortOrder
+    reminderDays?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationSettingsAvgOrderByAggregateInput = {
+    reminderDays?: SortOrder
+  }
+
+  export type NotificationSettingsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    emailEnabled?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationSettingsMinOrderByAggregateInput = {
+    id?: SortOrder
+    emailEnabled?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NotificationSettingsSumOrderByAggregateInput = {
+    reminderDays?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type ReminderLogDocumentIdDaysBeforeExpiryCompoundUniqueInput = {
+    documentId: string
+    daysBeforeExpiry: number
+  }
+
+  export type ReminderLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    daysBeforeExpiry?: SortOrder
+    sentAt?: SortOrder
+    documentId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReminderLogAvgOrderByAggregateInput = {
+    daysBeforeExpiry?: SortOrder
+  }
+
+  export type ReminderLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    daysBeforeExpiry?: SortOrder
+    sentAt?: SortOrder
+    documentId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReminderLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    daysBeforeExpiry?: SortOrder
+    sentAt?: SortOrder
+    documentId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReminderLogSumOrderByAggregateInput = {
+    daysBeforeExpiry?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type UserCreateNestedOneWithoutDocumentsInput = {
     create?: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutDocumentsInput
@@ -12229,11 +15132,25 @@ export namespace Prisma {
     connect?: DocumentTagWhereUniqueInput | DocumentTagWhereUniqueInput[]
   }
 
+  export type ReminderLogCreateNestedManyWithoutDocumentInput = {
+    create?: XOR<ReminderLogCreateWithoutDocumentInput, ReminderLogUncheckedCreateWithoutDocumentInput> | ReminderLogCreateWithoutDocumentInput[] | ReminderLogUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutDocumentInput | ReminderLogCreateOrConnectWithoutDocumentInput[]
+    createMany?: ReminderLogCreateManyDocumentInputEnvelope
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+  }
+
   export type DocumentTagUncheckedCreateNestedManyWithoutDocumentInput = {
     create?: XOR<DocumentTagCreateWithoutDocumentInput, DocumentTagUncheckedCreateWithoutDocumentInput> | DocumentTagCreateWithoutDocumentInput[] | DocumentTagUncheckedCreateWithoutDocumentInput[]
     connectOrCreate?: DocumentTagCreateOrConnectWithoutDocumentInput | DocumentTagCreateOrConnectWithoutDocumentInput[]
     createMany?: DocumentTagCreateManyDocumentInputEnvelope
     connect?: DocumentTagWhereUniqueInput | DocumentTagWhereUniqueInput[]
+  }
+
+  export type ReminderLogUncheckedCreateNestedManyWithoutDocumentInput = {
+    create?: XOR<ReminderLogCreateWithoutDocumentInput, ReminderLogUncheckedCreateWithoutDocumentInput> | ReminderLogCreateWithoutDocumentInput[] | ReminderLogUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutDocumentInput | ReminderLogCreateOrConnectWithoutDocumentInput[]
+    createMany?: ReminderLogCreateManyDocumentInputEnvelope
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12288,6 +15205,20 @@ export namespace Prisma {
     deleteMany?: DocumentTagScalarWhereInput | DocumentTagScalarWhereInput[]
   }
 
+  export type ReminderLogUpdateManyWithoutDocumentNestedInput = {
+    create?: XOR<ReminderLogCreateWithoutDocumentInput, ReminderLogUncheckedCreateWithoutDocumentInput> | ReminderLogCreateWithoutDocumentInput[] | ReminderLogUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutDocumentInput | ReminderLogCreateOrConnectWithoutDocumentInput[]
+    upsert?: ReminderLogUpsertWithWhereUniqueWithoutDocumentInput | ReminderLogUpsertWithWhereUniqueWithoutDocumentInput[]
+    createMany?: ReminderLogCreateManyDocumentInputEnvelope
+    set?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    disconnect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    delete?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    update?: ReminderLogUpdateWithWhereUniqueWithoutDocumentInput | ReminderLogUpdateWithWhereUniqueWithoutDocumentInput[]
+    updateMany?: ReminderLogUpdateManyWithWhereWithoutDocumentInput | ReminderLogUpdateManyWithWhereWithoutDocumentInput[]
+    deleteMany?: ReminderLogScalarWhereInput | ReminderLogScalarWhereInput[]
+  }
+
   export type DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput = {
     create?: XOR<DocumentTagCreateWithoutDocumentInput, DocumentTagUncheckedCreateWithoutDocumentInput> | DocumentTagCreateWithoutDocumentInput[] | DocumentTagUncheckedCreateWithoutDocumentInput[]
     connectOrCreate?: DocumentTagCreateOrConnectWithoutDocumentInput | DocumentTagCreateOrConnectWithoutDocumentInput[]
@@ -12300,6 +15231,20 @@ export namespace Prisma {
     update?: DocumentTagUpdateWithWhereUniqueWithoutDocumentInput | DocumentTagUpdateWithWhereUniqueWithoutDocumentInput[]
     updateMany?: DocumentTagUpdateManyWithWhereWithoutDocumentInput | DocumentTagUpdateManyWithWhereWithoutDocumentInput[]
     deleteMany?: DocumentTagScalarWhereInput | DocumentTagScalarWhereInput[]
+  }
+
+  export type ReminderLogUncheckedUpdateManyWithoutDocumentNestedInput = {
+    create?: XOR<ReminderLogCreateWithoutDocumentInput, ReminderLogUncheckedCreateWithoutDocumentInput> | ReminderLogCreateWithoutDocumentInput[] | ReminderLogUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutDocumentInput | ReminderLogCreateOrConnectWithoutDocumentInput[]
+    upsert?: ReminderLogUpsertWithWhereUniqueWithoutDocumentInput | ReminderLogUpsertWithWhereUniqueWithoutDocumentInput[]
+    createMany?: ReminderLogCreateManyDocumentInputEnvelope
+    set?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    disconnect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    delete?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    update?: ReminderLogUpdateWithWhereUniqueWithoutDocumentInput | ReminderLogUpdateWithWhereUniqueWithoutDocumentInput[]
+    updateMany?: ReminderLogUpdateManyWithWhereWithoutDocumentInput | ReminderLogUpdateManyWithWhereWithoutDocumentInput[]
+    deleteMany?: ReminderLogScalarWhereInput | ReminderLogScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCategoriesInput = {
@@ -12505,6 +15450,19 @@ export namespace Prisma {
     connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
   }
 
+  export type NotificationSettingsCreateNestedOneWithoutUserInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput
+    connect?: NotificationSettingsWhereUniqueInput
+  }
+
+  export type ReminderLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReminderLogCreateWithoutUserInput, ReminderLogUncheckedCreateWithoutUserInput> | ReminderLogCreateWithoutUserInput[] | ReminderLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutUserInput | ReminderLogCreateOrConnectWithoutUserInput[]
+    createMany?: ReminderLogCreateManyUserInputEnvelope
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -12538,6 +15496,19 @@ export namespace Prisma {
     connectOrCreate?: TagCreateOrConnectWithoutUserInput | TagCreateOrConnectWithoutUserInput[]
     createMany?: TagCreateManyUserInputEnvelope
     connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type NotificationSettingsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput
+    connect?: NotificationSettingsWhereUniqueInput
+  }
+
+  export type ReminderLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReminderLogCreateWithoutUserInput, ReminderLogUncheckedCreateWithoutUserInput> | ReminderLogCreateWithoutUserInput[] | ReminderLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutUserInput | ReminderLogCreateOrConnectWithoutUserInput[]
+    createMany?: ReminderLogCreateManyUserInputEnvelope
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -12614,6 +15585,30 @@ export namespace Prisma {
     deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
+  export type NotificationSettingsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput
+    upsert?: NotificationSettingsUpsertWithoutUserInput
+    disconnect?: NotificationSettingsWhereInput | boolean
+    delete?: NotificationSettingsWhereInput | boolean
+    connect?: NotificationSettingsWhereUniqueInput
+    update?: XOR<XOR<NotificationSettingsUpdateToOneWithWhereWithoutUserInput, NotificationSettingsUpdateWithoutUserInput>, NotificationSettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReminderLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReminderLogCreateWithoutUserInput, ReminderLogUncheckedCreateWithoutUserInput> | ReminderLogCreateWithoutUserInput[] | ReminderLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutUserInput | ReminderLogCreateOrConnectWithoutUserInput[]
+    upsert?: ReminderLogUpsertWithWhereUniqueWithoutUserInput | ReminderLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReminderLogCreateManyUserInputEnvelope
+    set?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    disconnect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    delete?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    update?: ReminderLogUpdateWithWhereUniqueWithoutUserInput | ReminderLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReminderLogUpdateManyWithWhereWithoutUserInput | ReminderLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReminderLogScalarWhereInput | ReminderLogScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -12682,6 +15677,93 @@ export namespace Prisma {
     update?: TagUpdateWithWhereUniqueWithoutUserInput | TagUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TagUpdateManyWithWhereWithoutUserInput | TagUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: NotificationSettingsCreateOrConnectWithoutUserInput
+    upsert?: NotificationSettingsUpsertWithoutUserInput
+    disconnect?: NotificationSettingsWhereInput | boolean
+    delete?: NotificationSettingsWhereInput | boolean
+    connect?: NotificationSettingsWhereUniqueInput
+    update?: XOR<XOR<NotificationSettingsUpdateToOneWithWhereWithoutUserInput, NotificationSettingsUpdateWithoutUserInput>, NotificationSettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReminderLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReminderLogCreateWithoutUserInput, ReminderLogUncheckedCreateWithoutUserInput> | ReminderLogCreateWithoutUserInput[] | ReminderLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReminderLogCreateOrConnectWithoutUserInput | ReminderLogCreateOrConnectWithoutUserInput[]
+    upsert?: ReminderLogUpsertWithWhereUniqueWithoutUserInput | ReminderLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReminderLogCreateManyUserInputEnvelope
+    set?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    disconnect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    delete?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    connect?: ReminderLogWhereUniqueInput | ReminderLogWhereUniqueInput[]
+    update?: ReminderLogUpdateWithWhereUniqueWithoutUserInput | ReminderLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReminderLogUpdateManyWithWhereWithoutUserInput | ReminderLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReminderLogScalarWhereInput | ReminderLogScalarWhereInput[]
+  }
+
+  export type NotificationSettingsCreatereminderDaysInput = {
+    set: number[]
+  }
+
+  export type UserCreateNestedOneWithoutNotificationSettingsInput = {
+    create?: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationSettingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NotificationSettingsUpdatereminderDaysInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type UserUpdateOneRequiredWithoutNotificationSettingsNestedInput = {
+    create?: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotificationSettingsInput
+    upsert?: UserUpsertWithoutNotificationSettingsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationSettingsInput, UserUpdateWithoutNotificationSettingsInput>, UserUncheckedUpdateWithoutNotificationSettingsInput>
+  }
+
+  export type DocumentCreateNestedOneWithoutReminderLogsInput = {
+    create?: XOR<DocumentCreateWithoutReminderLogsInput, DocumentUncheckedCreateWithoutReminderLogsInput>
+    connectOrCreate?: DocumentCreateOrConnectWithoutReminderLogsInput
+    connect?: DocumentWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReminderLogsInput = {
+    create?: XOR<UserCreateWithoutReminderLogsInput, UserUncheckedCreateWithoutReminderLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReminderLogsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type DocumentUpdateOneRequiredWithoutReminderLogsNestedInput = {
+    create?: XOR<DocumentCreateWithoutReminderLogsInput, DocumentUncheckedCreateWithoutReminderLogsInput>
+    connectOrCreate?: DocumentCreateOrConnectWithoutReminderLogsInput
+    upsert?: DocumentUpsertWithoutReminderLogsInput
+    connect?: DocumentWhereUniqueInput
+    update?: XOR<XOR<DocumentUpdateToOneWithWhereWithoutReminderLogsInput, DocumentUpdateWithoutReminderLogsInput>, DocumentUncheckedUpdateWithoutReminderLogsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReminderLogsNestedInput = {
+    create?: XOR<UserCreateWithoutReminderLogsInput, UserUncheckedCreateWithoutReminderLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReminderLogsInput
+    upsert?: UserUpsertWithoutReminderLogsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReminderLogsInput, UserUpdateWithoutReminderLogsInput>, UserUncheckedUpdateWithoutReminderLogsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12845,6 +15927,46 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type UserCreateWithoutDocumentsInput = {
     id?: string
     name?: string | null
@@ -12855,6 +15977,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     categories?: CategoryCreateNestedManyWithoutUserInput
     tags?: TagCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -12867,6 +15991,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
     tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -12911,6 +16037,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ReminderLogCreateWithoutDocumentInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    user: UserCreateNestedOneWithoutReminderLogsInput
+  }
+
+  export type ReminderLogUncheckedCreateWithoutDocumentInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    userId: string
+  }
+
+  export type ReminderLogCreateOrConnectWithoutDocumentInput = {
+    where: ReminderLogWhereUniqueInput
+    create: XOR<ReminderLogCreateWithoutDocumentInput, ReminderLogUncheckedCreateWithoutDocumentInput>
+  }
+
+  export type ReminderLogCreateManyDocumentInputEnvelope = {
+    data: ReminderLogCreateManyDocumentInput | ReminderLogCreateManyDocumentInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutDocumentsInput = {
     update: XOR<UserUpdateWithoutDocumentsInput, UserUncheckedUpdateWithoutDocumentsInput>
     create: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
@@ -12932,6 +16082,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     categories?: CategoryUpdateManyWithoutUserNestedInput
     tags?: TagUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -12944,6 +16096,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
     tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CategoryUpsertWithoutDocumentsInput = {
@@ -12995,6 +16149,33 @@ export namespace Prisma {
     tagId?: StringFilter<"DocumentTag"> | string
   }
 
+  export type ReminderLogUpsertWithWhereUniqueWithoutDocumentInput = {
+    where: ReminderLogWhereUniqueInput
+    update: XOR<ReminderLogUpdateWithoutDocumentInput, ReminderLogUncheckedUpdateWithoutDocumentInput>
+    create: XOR<ReminderLogCreateWithoutDocumentInput, ReminderLogUncheckedCreateWithoutDocumentInput>
+  }
+
+  export type ReminderLogUpdateWithWhereUniqueWithoutDocumentInput = {
+    where: ReminderLogWhereUniqueInput
+    data: XOR<ReminderLogUpdateWithoutDocumentInput, ReminderLogUncheckedUpdateWithoutDocumentInput>
+  }
+
+  export type ReminderLogUpdateManyWithWhereWithoutDocumentInput = {
+    where: ReminderLogScalarWhereInput
+    data: XOR<ReminderLogUpdateManyMutationInput, ReminderLogUncheckedUpdateManyWithoutDocumentInput>
+  }
+
+  export type ReminderLogScalarWhereInput = {
+    AND?: ReminderLogScalarWhereInput | ReminderLogScalarWhereInput[]
+    OR?: ReminderLogScalarWhereInput[]
+    NOT?: ReminderLogScalarWhereInput | ReminderLogScalarWhereInput[]
+    id?: StringFilter<"ReminderLog"> | string
+    daysBeforeExpiry?: IntFilter<"ReminderLog"> | number
+    sentAt?: DateTimeFilter<"ReminderLog"> | Date | string
+    documentId?: StringFilter<"ReminderLog"> | string
+    userId?: StringFilter<"ReminderLog"> | string
+  }
+
   export type UserCreateWithoutCategoriesInput = {
     id?: string
     name?: string | null
@@ -13005,6 +16186,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     documents?: DocumentCreateNestedManyWithoutUserInput
     tags?: TagCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCategoriesInput = {
@@ -13017,6 +16200,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCategoriesInput = {
@@ -13038,6 +16223,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDocumentsInput
     tags?: DocumentTagCreateNestedManyWithoutDocumentInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentUncheckedCreateWithoutCategoryInput = {
@@ -13054,6 +16240,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentCreateOrConnectWithoutCategoryInput = {
@@ -13087,6 +16274,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     documents?: DocumentUpdateManyWithoutUserNestedInput
     tags?: TagUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCategoriesInput = {
@@ -13099,6 +16288,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DocumentUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -13146,6 +16337,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     documents?: DocumentCreateNestedManyWithoutUserInput
     categories?: CategoryCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTagsInput = {
@@ -13158,6 +16351,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTagsInput = {
@@ -13204,6 +16399,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     documents?: DocumentUpdateManyWithoutUserNestedInput
     categories?: CategoryUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTagsInput = {
@@ -13216,6 +16413,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DocumentTagUpsertWithWhereUniqueWithoutTagInput = {
@@ -13248,6 +16447,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDocumentsInput
     category?: CategoryCreateNestedOneWithoutDocumentsInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentUncheckedCreateWithoutTagsInput = {
@@ -13264,6 +16464,7 @@ export namespace Prisma {
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentCreateOrConnectWithoutTagsInput = {
@@ -13315,6 +16516,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
     category?: CategoryUpdateOneWithoutDocumentsNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentUncheckedUpdateWithoutTagsInput = {
@@ -13331,6 +16533,7 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type TagUpsertWithoutDocumentsInput = {
@@ -13368,6 +16571,8 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutUserInput
     categories?: CategoryCreateNestedManyWithoutUserInput
     tags?: TagCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -13380,6 +16585,8 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
     tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -13408,6 +16615,8 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutUserNestedInput
     categories?: CategoryUpdateManyWithoutUserNestedInput
     tags?: TagUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -13420,6 +16629,8 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
     tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -13432,6 +16643,8 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutUserInput
     categories?: CategoryCreateNestedManyWithoutUserInput
     tags?: TagCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -13444,6 +16657,8 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
     tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -13472,6 +16687,8 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutUserNestedInput
     categories?: CategoryUpdateManyWithoutUserNestedInput
     tags?: TagUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -13484,6 +16701,8 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
     tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -13562,6 +16781,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     category?: CategoryCreateNestedOneWithoutDocumentsInput
     tags?: DocumentTagCreateNestedManyWithoutDocumentInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentUncheckedCreateWithoutUserInput = {
@@ -13578,6 +16798,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type DocumentCreateOrConnectWithoutUserInput = {
@@ -13635,6 +16856,51 @@ export namespace Prisma {
 
   export type TagCreateManyUserInputEnvelope = {
     data: TagCreateManyUserInput | TagCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationSettingsCreateWithoutUserInput = {
+    id?: string
+    emailEnabled?: boolean
+    reminderDays?: NotificationSettingsCreatereminderDaysInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationSettingsUncheckedCreateWithoutUserInput = {
+    id?: string
+    emailEnabled?: boolean
+    reminderDays?: NotificationSettingsCreatereminderDaysInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NotificationSettingsCreateOrConnectWithoutUserInput = {
+    where: NotificationSettingsWhereUniqueInput
+    create: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReminderLogCreateWithoutUserInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    document: DocumentCreateNestedOneWithoutReminderLogsInput
+  }
+
+  export type ReminderLogUncheckedCreateWithoutUserInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    documentId: string
+  }
+
+  export type ReminderLogCreateOrConnectWithoutUserInput = {
+    where: ReminderLogWhereUniqueInput
+    create: XOR<ReminderLogCreateWithoutUserInput, ReminderLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReminderLogCreateManyUserInputEnvelope = {
+    data: ReminderLogCreateManyUserInput | ReminderLogCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -13767,8 +17033,286 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Tag"> | Date | string
   }
 
+  export type NotificationSettingsUpsertWithoutUserInput = {
+    update: XOR<NotificationSettingsUpdateWithoutUserInput, NotificationSettingsUncheckedUpdateWithoutUserInput>
+    create: XOR<NotificationSettingsCreateWithoutUserInput, NotificationSettingsUncheckedCreateWithoutUserInput>
+    where?: NotificationSettingsWhereInput
+  }
+
+  export type NotificationSettingsUpdateToOneWithWhereWithoutUserInput = {
+    where?: NotificationSettingsWhereInput
+    data: XOR<NotificationSettingsUpdateWithoutUserInput, NotificationSettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationSettingsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailEnabled?: BoolFieldUpdateOperationsInput | boolean
+    reminderDays?: NotificationSettingsUpdatereminderDaysInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationSettingsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailEnabled?: BoolFieldUpdateOperationsInput | boolean
+    reminderDays?: NotificationSettingsUpdatereminderDaysInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReminderLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReminderLogWhereUniqueInput
+    update: XOR<ReminderLogUpdateWithoutUserInput, ReminderLogUncheckedUpdateWithoutUserInput>
+    create: XOR<ReminderLogCreateWithoutUserInput, ReminderLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReminderLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReminderLogWhereUniqueInput
+    data: XOR<ReminderLogUpdateWithoutUserInput, ReminderLogUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReminderLogUpdateManyWithWhereWithoutUserInput = {
+    where: ReminderLogScalarWhereInput
+    data: XOR<ReminderLogUpdateManyMutationInput, ReminderLogUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserCreateWithoutNotificationSettingsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    documents?: DocumentCreateNestedManyWithoutUserInput
+    categories?: CategoryCreateNestedManyWithoutUserInput
+    tags?: TagCreateNestedManyWithoutUserInput
+    reminderLogs?: ReminderLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotificationSettingsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
+    tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    reminderLogs?: ReminderLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotificationSettingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+  }
+
+  export type UserUpsertWithoutNotificationSettingsInput = {
+    update: XOR<UserUpdateWithoutNotificationSettingsInput, UserUncheckedUpdateWithoutNotificationSettingsInput>
+    create: XOR<UserCreateWithoutNotificationSettingsInput, UserUncheckedCreateWithoutNotificationSettingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotificationSettingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotificationSettingsInput, UserUncheckedUpdateWithoutNotificationSettingsInput>
+  }
+
+  export type UserUpdateWithoutNotificationSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    documents?: DocumentUpdateManyWithoutUserNestedInput
+    categories?: CategoryUpdateManyWithoutUserNestedInput
+    tags?: TagUpdateManyWithoutUserNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotificationSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
+    tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type DocumentCreateWithoutReminderLogsInput = {
+    id?: string
+    name: string
+    expiresAt: Date | string
+    notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDocumentsInput
+    category?: CategoryCreateNestedOneWithoutDocumentsInput
+    tags?: DocumentTagCreateNestedManyWithoutDocumentInput
+  }
+
+  export type DocumentUncheckedCreateWithoutReminderLogsInput = {
+    id?: string
+    name: string
+    expiresAt: Date | string
+    notes?: string | null
+    fileUrl?: string | null
+    filePathname?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    fileType?: string | null
+    userId: string
+    categoryId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  }
+
+  export type DocumentCreateOrConnectWithoutReminderLogsInput = {
+    where: DocumentWhereUniqueInput
+    create: XOR<DocumentCreateWithoutReminderLogsInput, DocumentUncheckedCreateWithoutReminderLogsInput>
+  }
+
+  export type UserCreateWithoutReminderLogsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    documents?: DocumentCreateNestedManyWithoutUserInput
+    categories?: CategoryCreateNestedManyWithoutUserInput
+    tags?: TagCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReminderLogsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
+    tags?: TagUncheckedCreateNestedManyWithoutUserInput
+    notificationSettings?: NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReminderLogsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReminderLogsInput, UserUncheckedCreateWithoutReminderLogsInput>
+  }
+
+  export type DocumentUpsertWithoutReminderLogsInput = {
+    update: XOR<DocumentUpdateWithoutReminderLogsInput, DocumentUncheckedUpdateWithoutReminderLogsInput>
+    create: XOR<DocumentCreateWithoutReminderLogsInput, DocumentUncheckedCreateWithoutReminderLogsInput>
+    where?: DocumentWhereInput
+  }
+
+  export type DocumentUpdateToOneWithWhereWithoutReminderLogsInput = {
+    where?: DocumentWhereInput
+    data: XOR<DocumentUpdateWithoutReminderLogsInput, DocumentUncheckedUpdateWithoutReminderLogsInput>
+  }
+
+  export type DocumentUpdateWithoutReminderLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+    category?: CategoryUpdateOneWithoutDocumentsNestedInput
+    tags?: DocumentTagUpdateManyWithoutDocumentNestedInput
+  }
+
+  export type DocumentUncheckedUpdateWithoutReminderLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    filePathname?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    fileType?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  }
+
+  export type UserUpsertWithoutReminderLogsInput = {
+    update: XOR<UserUpdateWithoutReminderLogsInput, UserUncheckedUpdateWithoutReminderLogsInput>
+    create: XOR<UserCreateWithoutReminderLogsInput, UserUncheckedCreateWithoutReminderLogsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReminderLogsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReminderLogsInput, UserUncheckedUpdateWithoutReminderLogsInput>
+  }
+
+  export type UserUpdateWithoutReminderLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    documents?: DocumentUpdateManyWithoutUserNestedInput
+    categories?: CategoryUpdateManyWithoutUserNestedInput
+    tags?: TagUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReminderLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
+    tags?: TagUncheckedUpdateManyWithoutUserNestedInput
+    notificationSettings?: NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type DocumentTagCreateManyDocumentInput = {
     tagId: string
+  }
+
+  export type ReminderLogCreateManyDocumentInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    userId: string
   }
 
   export type DocumentTagUpdateWithoutDocumentInput = {
@@ -13781,6 +17325,27 @@ export namespace Prisma {
 
   export type DocumentTagUncheckedUpdateManyWithoutDocumentInput = {
     tagId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReminderLogUpdateWithoutDocumentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutReminderLogsNestedInput
+  }
+
+  export type ReminderLogUncheckedUpdateWithoutDocumentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReminderLogUncheckedUpdateManyWithoutDocumentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type DocumentCreateManyCategoryInput = {
@@ -13812,6 +17377,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
     tags?: DocumentTagUpdateManyWithoutDocumentNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentUncheckedUpdateWithoutCategoryInput = {
@@ -13828,6 +17394,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentUncheckedUpdateManyWithoutCategoryInput = {
@@ -13909,6 +17476,13 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ReminderLogCreateManyUserInput = {
+    id?: string
+    daysBeforeExpiry: number
+    sentAt?: Date | string
+    documentId: string
+  }
+
   export type AccountUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
@@ -13986,6 +17560,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneWithoutDocumentsNestedInput
     tags?: DocumentTagUpdateManyWithoutDocumentNestedInput
+    reminderLogs?: ReminderLogUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentUncheckedUpdateWithoutUserInput = {
@@ -14002,6 +17577,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+    reminderLogs?: ReminderLogUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type DocumentUncheckedUpdateManyWithoutUserInput = {
@@ -14057,6 +17633,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReminderLogUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    document?: DocumentUpdateOneRequiredWithoutReminderLogsNestedInput
+  }
+
+  export type ReminderLogUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReminderLogUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    daysBeforeExpiry?: IntFieldUpdateOperationsInput | number
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentId?: StringFieldUpdateOperationsInput | string
   }
 
 

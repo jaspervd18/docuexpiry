@@ -193,6 +193,23 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.NotificationSettingsScalarFieldEnum = {
+  id: 'id',
+  emailEnabled: 'emailEnabled',
+  reminderDays: 'reminderDays',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReminderLogScalarFieldEnum = {
+  id: 'id',
+  daysBeforeExpiry: 'daysBeforeExpiry',
+  sentAt: 'sentAt',
+  documentId: 'documentId',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -217,7 +234,9 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   User: 'User',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  NotificationSettings: 'NotificationSettings',
+  ReminderLog: 'ReminderLog'
 };
 
 /**

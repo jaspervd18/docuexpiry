@@ -16,6 +16,8 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
     DATABASE_URL: z.string().url(),
+    RESEND_API_KEY: z.string().min(1),
+    CRON_SECRET: z.string().min(1),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -26,6 +28,8 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    CRON_SECRET: process.env.CRON_SECRET,
     NODE_ENV: process.env.NODE_ENV,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
