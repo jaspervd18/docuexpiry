@@ -15,7 +15,7 @@ export function MarketingFaq() {
       <RevealStagger>
         <Reveal className="mb-8 space-y-2">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">FAQ</h2>
-          <p className="text-muted-foreground">The usual questions — answered.</p>
+          <p className="text-muted-foreground">The usual questions, answered.</p>
         </Reveal>
 
         <Reveal>

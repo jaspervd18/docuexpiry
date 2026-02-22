@@ -38,7 +38,7 @@ export function MarketingNav(props: { signInHref: string }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b bg-background/70 backdrop-blur-md transition-shadow",
+        "sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-md transition-shadow",
         scrolled && "shadow-sm",
       )}
     >

@@ -13,7 +13,7 @@ export function MarketingSeoBlock() {
           </h2>
           <p className="text-muted-foreground">
             Whether it&#39;s your passport, car insurance, a client contract, or
-            an ISO certificate — DocuExpiry gives you one place to track it all.
+            an ISO certificate, DocuExpiry gives you one place to track it all.
             Add a name and a date, and we&#39;ll remind you before it&#39;s too late.
           </p>
           <ul className="space-y-2 text-sm">
@@ -32,36 +32,31 @@ export function MarketingSeoBlock() {
           </ul>
         </Reveal>
 
-        <Reveal className="relative overflow-hidden rounded-3xl bg-card/80 p-6 shadow-sm">
-          {/* soft glow */}
-          <div className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-
-          {/* contrast surface */}
-          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-primary/5" />
-
-          {/* subtle boundary */}
-          <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-border/30" />
-
-          <div className="relative">
-            <div className="text-sm font-medium">Popular use cases</div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <UseCase
-                title="Personal documents"
-                desc="Passports, driving licences, ID cards, visas."
-              />
-              <UseCase
-                title="Compliance docs"
-                desc="ISO, safety checks, training, site access permits."
-              />
-              <UseCase
-                title="Insurance & vehicles"
-                desc="Car insurance, MOT, road tax, equipment cover."
-              />
-              <UseCase
-                title="Licenses"
-                desc="Professional registrations, permits, and more."
-              />
-            </div>
+        <Reveal className="space-y-3">
+          <h3 className="text-lg font-semibold tracking-tight">
+            Popular use cases
+          </h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <UseCase
+              icon="🪪"
+              title="Personal documents"
+              desc="Passports, driving licences, ID cards, visas."
+            />
+            <UseCase
+              icon="📋"
+              title="Compliance"
+              desc="ISO certificates, safety checks, training records."
+            />
+            <UseCase
+              icon="🚗"
+              title="Insurance & vehicles"
+              desc="Car insurance, MOT, road tax, equipment cover."
+            />
+            <UseCase
+              icon="📄"
+              title="Licenses & permits"
+              desc="Professional registrations, permits, and more."
+            />
           </div>
         </Reveal>
       </RevealStagger>
@@ -69,9 +64,10 @@ export function MarketingSeoBlock() {
   );
 }
 
-function UseCase(props: { title: string; desc: string }) {
+function UseCase(props: { icon: string; title: string; desc: string }) {
   return (
-    <div className="rounded-2xl border border-border/40 bg-background/60 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5 hover:shadow-md">
+    <div className="rounded-2xl border border-border/60 bg-card/80 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md">
+      <div className="mb-2 text-xl">{props.icon}</div>
       <div className="text-sm font-medium">{props.title}</div>
       <div className="mt-1 text-xs text-muted-foreground">{props.desc}</div>
     </div>

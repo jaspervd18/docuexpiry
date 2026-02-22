@@ -25,7 +25,7 @@ export function MarketingHero(props: { signInHref: string }) {
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card px-3 py-1 text-sm">
                 <span className="inline-flex h-2 w-2 rounded-full bg-primary" />
                 Never get caught off guard.
               </div>
@@ -39,7 +39,7 @@ export function MarketingHero(props: { signInHref: string }) {
 
             <Reveal delay={0.1}>
               <p className="text-pretty text-base text-muted-foreground sm:text-lg">
-                Passports, car insurance, business licences, contracts —
+                Passports, car insurance, business licences, contracts...
                 DocuExpiry tracks them all and reminds you before it&#39;s too
                 late. Set up in 2 minutes.
               </p>
@@ -130,7 +130,7 @@ export function MarketingHero(props: { signInHref: string }) {
 
 function MiniStat(props: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div className="rounded-2xl border bg-card/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <div className="rounded-2xl border border-border/60 bg-card/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex items-center gap-2 text-sm font-medium">
         <span className="text-primary">{props.icon}</span>
         {props.title}

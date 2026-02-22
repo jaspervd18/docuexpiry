@@ -85,11 +85,11 @@ export function DashboardShell({
         </nav>
 
         {/* Plan card */}
-        <div className="border-t border-border/40 px-4 py-4">
+        <div className="mt-auto border-t border-border/40 px-4 py-4">
           <div className="rounded-md bg-muted/50 px-3 py-2.5 text-xs">
             <span className="font-medium">{planName}</span>
             <span className="text-muted-foreground">
-              {" "}— {documentCount}/{documentLimit} docs
+              {" "}- {documentCount}/{documentLimit} docs
             </span>
           </div>
         </div>

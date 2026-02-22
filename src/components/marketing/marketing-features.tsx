@@ -47,7 +47,7 @@ export function MarketingFeatures() {
             <FeatureCard
               icon={<Clock className="h-5 w-5 text-primary" />}
               title="Smart sorting"
-              desc="Sort by expiry date, category, or name—so urgent items rise to the top."
+              desc="Sort by expiry date, category, or name so urgent items rise to the top."
             />
           </Reveal>
           <Reveal>
@@ -61,7 +61,7 @@ export function MarketingFeatures() {
             <FeatureCard
               icon={<ArrowRight className="h-5 w-5 text-primary" />}
               title="Works for everything"
-              desc="Passports, contracts, insurance, licences — if it expires, it belongs here."
+              desc="Passports, contracts, insurance, licences. If it expires, it belongs here."
             />
           </Reveal>
         </div>
@@ -72,14 +72,14 @@ export function MarketingFeatures() {
 
 function FeatureCard(props: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <Card className="group rounded-3xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+    <Card className="group flex h-full flex-col rounded-3xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
       <CardHeader className="space-y-2">
         <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/15 ring-1 ring-primary/20 transition-transform duration-200 group-hover:scale-105">
           {props.icon}
         </div>
         <CardTitle className="text-base">{props.title}</CardTitle>
       </CardHeader>
-      <CardContent className="text-sm text-muted-foreground">{props.desc}</CardContent>
+      <CardContent className="flex-1 text-sm text-muted-foreground">{props.desc}</CardContent>
     </Card>
   );
 }
