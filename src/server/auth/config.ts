@@ -38,7 +38,7 @@ export const authConfig = {
       user: {
         ...session.user,
         id: user.id,
-        plan: (user as Record<string, unknown>).plan as string ?? "free",
+        plan: (user as unknown as Record<string, unknown>).plan as string ?? "free",
       },
     }),
   },

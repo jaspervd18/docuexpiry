@@ -33,7 +33,7 @@ export function ReminderEmail({
     <Html>
       <Head />
       <Preview>
-        {documentName} expires in {daysUntilExpiry} day
+        {documentName} expires in {String(daysUntilExpiry)} day
         {daysUntilExpiry === 1 ? "" : "s"}
       </Preview>
       <Body style={body}>

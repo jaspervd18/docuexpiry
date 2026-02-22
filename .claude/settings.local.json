@@ -6,7 +6,8 @@
       "Bash(openssl rand:*)",
       "Bash(curl:*)",
       "Bash(xxd:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(cd /c/Users/jaspe/Documents/Zakelijk/DocuExpiry/docuexpiry && npx tsc --noEmit 2>&1)"
     ]
   }
 }
