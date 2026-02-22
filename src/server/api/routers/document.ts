@@ -1,6 +1,8 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import type { Prisma } from "../../../../generated/prisma";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { getDocumentLimit } from "~/lib/plans";
 
 const normalizeName = (s: string) => s.trim();
 
@@ -43,6 +45,17 @@ export const documentRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
+
+      // Enforce document limit based on plan
+      const plan = ctx.session.user.plan ?? "free";
+      const limit = getDocumentLimit(plan);
+      const count = await ctx.db.document.count({ where: { userId } });
+      if (count >= limit) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: `Document limit reached (${limit}). Upgrade your plan to add more.`,
+        });
+      }
 
       const name = normalizeName(input.name);
       const notes = input.notes?.trim() ?? undefined;

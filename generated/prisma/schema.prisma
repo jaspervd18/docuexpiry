@@ -118,6 +118,10 @@ model User {
   categories    Category[]
   tags          Tag[]
 
+  stripeCustomerId     String? @unique
+  stripeSubscriptionId String?
+  plan                 String  @default("free")
+
   notificationSettings NotificationSettings?
   reminderLogs         ReminderLog[]
 }
