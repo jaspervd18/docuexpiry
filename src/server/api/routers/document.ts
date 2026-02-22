@@ -384,7 +384,7 @@ export const documentRouter = createTRPCRouter({
           userId,
           name: d.name.trim(),
           expiresAt: d.expiresAt,
-          notes: d.notes?.trim() || null,
+          notes: d.notes?.trim() ?? null,
           categoryId: d.categoryName
             ? (categoryMap.get(d.categoryName.trim()) ?? null)
             : null,

@@ -10,7 +10,8 @@
       "Bash(cd /c/Users/jaspe/Documents/Zakelijk/DocuExpiry/docuexpiry && npx tsc --noEmit 2>&1)",
       "Bash(cd /c/Users/jaspe/Documents/Zakelijk/DocuExpiry/docuexpiry && npx shadcn@latest add alert-dialog -y 2>&1)",
       "Bash(cd /c/Users/jaspe/Documents/Zakelijk/DocuExpiry/docuexpiry && npx shadcn@latest add alert-dialog --overwrite 2>&1)",
-      "Bash(cd /c/Users/jaspe/Documents/Zakelijk/DocuExpiry/docuexpiry && npx shadcn@latest add dialog --overwrite 2>&1)"
+      "Bash(cd /c/Users/jaspe/Documents/Zakelijk/DocuExpiry/docuexpiry && npx shadcn@latest add dialog --overwrite 2>&1)",
+      "Bash(tail:*)"
     ]
   }
 }

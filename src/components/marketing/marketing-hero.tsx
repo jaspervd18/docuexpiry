@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BellRing, Check, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRight, BellRing, Clock, ShieldCheck } from "lucide-react";
 import { format } from "date-fns";
 
 import { Reveal, RevealStagger } from "./reveal";

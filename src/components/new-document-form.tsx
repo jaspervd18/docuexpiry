@@ -5,7 +5,7 @@ import { upload } from "@vercel/blob/client";
 import { format } from "date-fns";
 import { CalendarIcon, Sparkles, Upload } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -69,16 +69,9 @@ export function NewDocumentForm() {
   const [upgradePrompt, setUpgradePrompt] = useState<{ count: number; limit: number } | null>(null);
 
   const categoriesQuery = api.document.listCategories.useQuery();
-  const tagsQuery = api.document.listTags.useQuery();
   const planQuery = api.subscription.getStatus.useQuery(undefined, { staleTime: 60_000 });
 
   const categories = categoriesQuery.data ?? [];
-  const knownTags = tagsQuery.data ?? [];
-
-  const _knownTagNames = useMemo(
-    () => new Set(knownTags.map((t) => t.name.toLowerCase())),
-    [knownTags],
-  );
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -115,7 +108,7 @@ export function NewDocumentForm() {
 
         // Check if user is approaching their document limit (free plan)
         const status = planQuery.data;
-        if (status && status.plan === "free") {
+        if (status?.plan === "free") {
           const newCount = status.documentCount + 1;
           const remaining = status.documentLimit - newCount;
           // Show prompt when 3 or fewer slots remaining
@@ -138,8 +131,8 @@ export function NewDocumentForm() {
     const categoryId =
       values.categoryId &&
         values.categoryId !== "__new" &&
-        values.categoryId !== "__none"
-        ? values.categoryId
+        values.categoryId !== "__none" ?
+        values.categoryId
         : undefined;
 
     const newCategoryName =

@@ -44,7 +44,7 @@ function tryParseDate(value: string): Date | null {
   if (!isNaN(iso)) return new Date(iso);
 
   // DD/MM/YYYY or DD-MM-YYYY
-  const dmyMatch = cleaned.match(/^(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})$/);
+  const dmyMatch = /^(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})$/.exec(cleaned);
   if (dmyMatch) {
     const [, d, m, y] = dmyMatch;
     const date = new Date(Number(y), Number(m) - 1, Number(d));
@@ -52,7 +52,7 @@ function tryParseDate(value: string): Date | null {
   }
 
   // MM/DD/YYYY
-  const mdyMatch = cleaned.match(/^(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})$/);
+  const mdyMatch = /^(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})$/.exec(cleaned);
   if (mdyMatch) {
     const [, m, d, y] = mdyMatch;
     const date = new Date(Number(y), Number(m) - 1, Number(d));

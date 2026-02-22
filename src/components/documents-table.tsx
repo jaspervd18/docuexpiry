@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { ArrowUpDown, Lock, MoreHorizontal, Search, Sparkles, Upload } from "lucide-react";
-import { z } from "zod";
 
 import { api } from "~/trpc/react";
 import { useDebouncedValue } from "~/hooks/use-debounced-value";
@@ -55,8 +54,7 @@ import {
 } from "~/components/ui/dialog";
 import { CsvImportModal } from "~/components/csv-import-modal";
 
-const SortBySchema = z.enum(["name", "expiresAt", "createdAt", "category"]);
-type SortBy = z.infer<typeof SortBySchema>;
+type SortBy = "name" | "expiresAt" | "createdAt" | "category";
 
 type SortDir = "asc" | "desc";
 
