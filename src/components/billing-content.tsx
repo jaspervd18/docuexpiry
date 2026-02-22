@@ -170,7 +170,7 @@ export function BillingContent() {
                     variant={tier.featured ? "default" : "outline"}
                     onClick={() =>
                       checkoutMutation.mutate({
-                        planId: tier.id as "solo" | "team",
+                        planId: tier.id,
                       })
                     }
                     disabled={checkoutMutation.isPending}

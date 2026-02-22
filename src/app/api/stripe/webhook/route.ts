@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
   switch (event.type) {
     case "checkout.session.completed": {
-      const session = event.data.object as Stripe.Checkout.Session;
+      const session = event.data.object;
       const userId = session.metadata?.userId;
       const customerId = session.customer as string;
       const subscriptionId = session.subscription as string;
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     }
 
     case "customer.subscription.updated": {
-      const subscription = event.data.object as Stripe.Subscription;
+      const subscription = event.data.object;
       const customerId = subscription.customer as string;
       const priceId = subscription.items.data[0]?.price.id ?? "";
 
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
     }
 
     case "customer.subscription.deleted": {
-      const subscription = event.data.object as Stripe.Subscription;
+      const subscription = event.data.object;
       const customerId = subscription.customer as string;
 
       const user = await db.user.findUnique({
