@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, Search } from "lucide-react";
 import { z } from "zod";
 
 import { api } from "~/trpc/react";
@@ -20,13 +20,12 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "~/components/ui/table";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import {
   Pagination,
   PaginationContent,
@@ -37,17 +36,16 @@ import {
   PaginationPrevious,
 } from "~/components/ui/pagination";
 
-// Keep these aligned with your router enums
 const SortBySchema = z.enum(["name", "expiresAt", "createdAt", "category"]);
 type SortBy = z.infer<typeof SortBySchema>;
 
-const SortDirSchema = z.enum(["asc", "desc"]);
-type SortDir = z.infer<typeof SortDirSchema>;
+type SortDir = "asc" | "desc";
+
+const PAGE_SIZE_OPTIONS = [10, 20, 50] as const;
 
 export function DocumentsTable() {
   const utils = api.useUtils();
 
-  // --- UI state ---
   const [search, setSearch] = React.useState("");
   const debouncedSearch = useDebouncedValue(search, 300);
   const query = debouncedSearch.trim();
@@ -56,9 +54,8 @@ export function DocumentsTable() {
   const [sortDir, setSortDir] = React.useState<SortDir>("asc");
 
   const [page, setPage] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(10); // you can make this selectable later
+  const [pageSize, setPageSize] = React.useState<number>(20);
 
-  // --- tRPC queries ---
   const listQuery = api.document.list.useQuery(
     {
       query: query.length ? query : undefined,
@@ -66,7 +63,6 @@ export function DocumentsTable() {
       sortDir,
       page,
       pageSize,
-      // keep defaults for status/category for now
       status: "all",
     },
     {
@@ -77,12 +73,10 @@ export function DocumentsTable() {
 
   const deleteMutation = api.document.delete.useMutation({
     onSuccess: async () => {
-      // refresh list after delete
       await utils.document.list.invalidate();
     },
   });
 
-  // Reset to page 1 when search changes (debounced) or sorting changes
   React.useEffect(() => {
     setPage(1);
   }, [query, sortBy, sortDir, pageSize]);
@@ -101,7 +95,17 @@ export function DocumentsTable() {
     setSortDir((d) => (d === "asc" ? "desc" : "asc"));
   };
 
-  // Pagination helper: show 1, last, and a small window
+  const sortLabel = (key: SortBy) => {
+    const labels: Record<SortBy, string> = {
+      name: "Name",
+      expiresAt: "Expires",
+      createdAt: "Added",
+      category: "Category",
+    };
+    const arrow = sortBy === key ? (sortDir === "asc" ? " \u2191" : " \u2193") : "";
+    return labels[key] + arrow;
+  };
+
   const pages = React.useMemo(() => {
     const tp = Math.max(1, totalPages);
     const set = new Set<number>([1, tp]);
@@ -115,224 +119,247 @@ export function DocumentsTable() {
     <div className="w-full space-y-4">
       {/* Toolbar */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Input
-          placeholder="Search documents..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="sm:max-w-sm"
-        />
+        <div className="relative sm:max-w-sm flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search documents..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
 
-        <div className="sm:ml-auto flex items-center gap-2">
-          <div className="text-sm text-muted-foreground">
-            {listQuery.isFetching ? "Updating…" : `${result?.total ?? 0} total`}
+        <div className="flex items-center gap-2 sm:ml-auto">
+          {/* Sort buttons */}
+          <div className="hidden items-center gap-1 md:flex">
+            {(["expiresAt", "name", "category", "createdAt"] as const).map(
+              (key) => (
+                <Button
+                  key={key}
+                  type="button"
+                  variant={sortBy === key ? "secondary" : "ghost"}
+                  size="sm"
+                  className="text-xs"
+                  onClick={() => toggleSort(key)}
+                >
+                  {sortLabel(key)}
+                </Button>
+              ),
+            )}
           </div>
 
-          <Button asChild>
+          {/* Mobile sort */}
+          <div className="md:hidden">
+            <Select
+              value={sortBy}
+              onValueChange={(v) => {
+                setSortBy(v as SortBy);
+                setSortDir("asc");
+              }}
+            >
+              <SelectTrigger className="w-[130px]">
+                <ArrowUpDown className="mr-2 h-3 w-3" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="expiresAt">Expires</SelectItem>
+                <SelectItem value="name">Name</SelectItem>
+                <SelectItem value="category">Category</SelectItem>
+                <SelectItem value="createdAt">Added</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="text-sm text-muted-foreground tabular-nums">
+            {listQuery.isFetching ? "Updating..." : `${result?.total ?? 0} docs`}
+          </div>
+
+          <Button asChild size="sm">
             <Link href="/documents/new">Add document</Link>
           </Button>
         </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-hidden rounded-xl border border-border/60 bg-card/80 shadow-sm ring-1 ring-primary/10">
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-primary/10 border-b border-border/60 text-foreground/80">
-              <TableHead className="w-[40%]">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="-ml-3 hover:bg-primary/10"
-                  onClick={() => toggleSort("name")}
+      {/* Document rows */}
+      <div className="divide-y divide-border/40">
+        {listQuery.isLoading ? (
+          <div className="py-16 text-center text-sm text-muted-foreground">
+            Loading...
+          </div>
+        ) : items.length === 0 ? (
+          <div className="py-16 text-center text-sm text-muted-foreground">
+            {query ? "No documents match your search." : "No documents yet. Add your first one to get started."}
+          </div>
+        ) : (
+          items.map((doc) => {
+            const tags = doc.tags.map((t) => t.tag.name);
+
+            return (
+              <div
+                key={doc.id}
+                className="group flex items-center gap-4 px-2 py-3 transition-colors hover:bg-primary/5"
+              >
+                {/* Main info */}
+                <Link
+                  href={`/documents/${doc.id}`}
+                  className="flex min-w-0 flex-1 items-center gap-4"
                 >
-                  Document <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-
-              <TableHead>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="-ml-3 hover:bg-primary/10"
-                  onClick={() => toggleSort("category")}
-                >
-                  Category <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-
-              <TableHead>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="-ml-3 hover:bg-primary/10"
-                  onClick={() => toggleSort("expiresAt")}
-                >
-                  Expires <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-
-              <TableHead>Status</TableHead>
-
-              <TableHead className="w-[60px]" />
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {listQuery.isLoading ? (
-              <TableRow>
-                <TableCell
-                  colSpan={5}
-                  className="h-24 text-center text-muted-foreground"
-                >
-                  Loading…
-                </TableCell>
-              </TableRow>
-            ) : items.length ? (
-              items.map((doc) => {
-                const tags = doc.tags.map((t) => t.tag.name);
-
-                return (
-                  <TableRow key={doc.id} className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                    <TableCell>
-                      <div className="space-y-1">
-                        <div className="font-medium">{doc.name}</div>
-                        {tags.length ? (
-                          <div className="text-xs text-muted-foreground">
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate font-medium group-hover:text-primary transition-colors">
+                      {doc.name}
+                    </div>
+                    <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
+                      <span>{doc.category?.name ?? "No category"}</span>
+                      {tags.length > 0 && (
+                        <>
+                          <span className="text-border">|</span>
+                          <span className="truncate">
                             {tags.slice(0, 3).join(", ")}
-                            {tags.length > 3 ? "…" : ""}
-                          </div>
-                        ) : null}
-                      </div>
-                    </TableCell>
+                            {tags.length > 3 ? "..." : ""}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
 
-                    <TableCell className="text-sm text-muted-foreground">
-                      {doc.category?.name ?? "—"}
-                    </TableCell>
-
-                    <TableCell className="text-sm">
+                  {/* Expiry date + status */}
+                  <div className="hidden items-center gap-3 sm:flex">
+                    <span className="text-sm text-muted-foreground tabular-nums">
                       {format(new Date(doc.expiresAt), "PP")}
-                    </TableCell>
+                    </span>
+                    <DocumentStatusBadge expiresAt={new Date(doc.expiresAt)} />
+                  </div>
 
-                    <TableCell>
-                      <DocumentStatusBadge expiresAt={new Date(doc.expiresAt)} />
-                    </TableCell>
+                  {/* Mobile: just badge */}
+                  <div className="sm:hidden">
+                    <DocumentStatusBadge expiresAt={new Date(doc.expiresAt)} />
+                  </div>
+                </Link>
 
-                    <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            aria-label="Open menu"
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
+                {/* Actions */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 shrink-0 opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100"
+                      aria-label="Open menu"
+                    >
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
 
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem asChild>
-                            <Link href={`/documents/${doc.id}`}>View</Link>
-                          </DropdownMenuItem>
-
-                          <DropdownMenuItem asChild>
-                            <Link href={`/documents/${doc.id}/edit`}>Edit</Link>
-                          </DropdownMenuItem>
-
-                          <DropdownMenuSeparator />
-
-                          <DropdownMenuItem
-                            className="text-destructive focus:text-destructive"
-                            onClick={() => {
-                              const ok = window.confirm(
-                                `Delete "${doc.name}"? This can’t be undone.`,
-                              );
-                              if (!ok) return;
-                              deleteMutation.mutate({ id: doc.id });
-                            }}
-                          >
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={4}
-                  className="h-24 text-center text-muted-foreground"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-
-      {/* Pagination */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="text-sm text-muted-foreground">
-          Page {result?.page ?? page} of {totalPages}
-        </div>
-
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPage((p) => Math.max(1, p - 1));
-                }}
-                aria-disabled={page <= 1}
-              />
-            </PaginationItem>
-
-            {pages.map((p, idx) => {
-              const prev = pages[idx - 1];
-              const needsEllipsis = prev && p - prev > 1;
-
-              return (
-                <React.Fragment key={p}>
-                  {needsEllipsis ? (
-                    <PaginationItem>
-                      <PaginationEllipsis />
-                    </PaginationItem>
-                  ) : null}
-
-                  <PaginationItem>
-                    <PaginationLink
-                      href="#"
-                      isActive={p === page}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setPage(p);
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href={`/documents/${doc.id}`}>View</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href={`/documents/${doc.id}/edit`}>Edit</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      className="text-destructive focus:text-destructive"
+                      onClick={() => {
+                        const ok = window.confirm(
+                          `Delete "${doc.name}"? This can't be undone.`,
+                        );
+                        if (!ok) return;
+                        deleteMutation.mutate({ id: doc.id });
                       }}
                     >
-                      {p}
-                    </PaginationLink>
-                  </PaginationItem>
-                </React.Fragment>
-              );
-            })}
-
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPage((p) => Math.min(totalPages, p + 1));
-                }}
-                aria-disabled={page >= totalPages}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            );
+          })
+        )}
       </div>
+
+      {/* Pagination + page size */}
+      {totalPages > 1 || items.length > 0 ? (
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground whitespace-nowrap">
+              Page {result?.page ?? page} of {totalPages}
+            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">Show</span>
+              <Select
+                value={String(pageSize)}
+                onValueChange={(v) => setPageSize(Number(v))}
+              >
+                <SelectTrigger className="h-8 w-[70px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {PAGE_SIZE_OPTIONS.map((n) => (
+                    <SelectItem key={n} value={String(n)}>
+                      {n}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage((p) => Math.max(1, p - 1));
+                  }}
+                  aria-disabled={page <= 1}
+                />
+              </PaginationItem>
+
+              {pages.map((p, idx) => {
+                const prev = pages[idx - 1];
+                const needsEllipsis = prev && p - prev > 1;
+
+                return (
+                  <React.Fragment key={p}>
+                    {needsEllipsis ? (
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                    ) : null}
+
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#"
+                        isActive={p === page}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setPage(p);
+                        }}
+                      >
+                        {p}
+                      </PaginationLink>
+                    </PaginationItem>
+                  </React.Fragment>
+                );
+              })}
+
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage((p) => Math.min(totalPages, p + 1));
+                  }}
+                  aria-disabled={page >= totalPages}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      ) : null}
     </div>
   );
 }

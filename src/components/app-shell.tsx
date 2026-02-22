@@ -19,7 +19,13 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
   );
 }
 
-export async function AppShellWithSidebar({ children }: { children: React.ReactNode }) {
+export async function AppShellWithSidebar({
+  children,
+  flush,
+}: {
+  children: React.ReactNode;
+  flush?: boolean;
+}) {
   const session = await auth();
   if (!session?.user) redirect("/api/auth/signin");
 
@@ -36,6 +42,7 @@ export async function AppShellWithSidebar({ children }: { children: React.ReactN
         plan={plan}
         documentCount={documentCount}
         documentLimit={documentLimit}
+        flush={flush}
       >
         {children}
       </DashboardShell>

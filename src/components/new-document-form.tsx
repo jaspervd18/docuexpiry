@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { upload } from "@vercel/blob/client";
 import { format } from "date-fns";
+import { CalendarIcon, Upload } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -10,7 +11,6 @@ import { z } from "zod";
 import { api } from "~/trpc/react";
 
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -30,6 +30,7 @@ import {
 } from "~/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
 import { Calendar } from "~/components/ui/calendar";
+import { cn } from "~/lib/utils";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required").max(200),
@@ -63,8 +64,7 @@ export function NewDocumentForm() {
   const categories = categoriesQuery.data ?? [];
   const knownTags = tagsQuery.data ?? [];
 
-  // Keeping your memo for future “tag picker” UX
-  const knownTagNames = useMemo(
+  const _knownTagNames = useMemo(
     () => new Set(knownTags.map((t) => t.name.toLowerCase())),
     [knownTags],
   );
@@ -136,172 +136,179 @@ export function NewDocumentForm() {
   const isSubmitting = createMutation.isPending || isUploading;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Document details</CardTitle>
-      </CardHeader>
+    <Form {...form}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+        {/* Essentials */}
+        <div className="rounded-xl border border-border/60 bg-card/80 p-5 shadow-sm space-y-5">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name *</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. Insurance certificate"
+                    {...field}
+                    disabled={isSubmitting}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <CardContent>
-        <Form {...form}>
-          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            {/* Essentials */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem className="md:col-span-2">
-                    <FormLabel>Name *</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g. Insurance certificate"
-                        {...field}
-                        disabled={isSubmitting}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="expiresAt"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Expiration date *</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            type="button"
-                            variant="outline"
-                            className="w-full justify-start text-left font-normal"
-                            disabled={isSubmitting}
-                          >
-                            {field.value ? format(field.value, "PPP") : "Pick a date"}
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={(d) => d && field.onChange(d)}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {/* Category */}
-              <FormField
-                control={form.control}
-                name="categoryId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      value={field.value ?? "__none"}
-                      onValueChange={(v) =>
-                        field.onChange(v === "__none" ? undefined : v)
-                      }
-                      disabled={isSubmitting}
-                    >
+          <div className="grid gap-5 sm:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="expiresAt"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Expiration date *</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="__none">No category</SelectItem>
-                        {categories.map((c) => (
-                          <SelectItem key={c.id} value={c.id}>
-                            {c.name}
-                          </SelectItem>
-                        ))}
-                        <SelectItem value="__new">+ Create new…</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {form.watch("categoryId") === "__new" ? (
-                <FormField
-                  control={form.control}
-                  name="newCategoryName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>New category name</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="e.g. Compliance"
-                          {...field}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
                           disabled={isSubmitting}
-                        />
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? format(field.value, "PPP") : "Pick a date"}
+                        </Button>
                       </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ) : (
-                <div />
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={(d) => d && field.onChange(d)}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
               )}
-            </div>
+            />
 
-            {/* Organize */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="tagsText"
-                render={({ field }) => (
-                  <FormItem className="md:col-span-2">
-                    <FormLabel>Tags</FormLabel>
+            <FormField
+              control={form.control}
+              name="categoryId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    value={field.value ?? "__none"}
+                    onValueChange={(v) =>
+                      field.onChange(v === "__none" ? undefined : v)
+                    }
+                    disabled={isSubmitting}
+                  >
                     <FormControl>
-                      <Input
-                        placeholder="e.g. vehicle, insurance, yearly"
-                        {...field}
-                        disabled={isSubmitting}
-                      />
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
                     </FormControl>
-                    <p className="text-xs text-muted-foreground">
-                      Separate tags with commas. (We’ll add tag picking later.)
-                    </p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                    <SelectContent>
+                      <SelectItem value="__none">No category</SelectItem>
+                      {categories.map((c) => (
+                        <SelectItem key={c.id} value={c.id}>
+                          {c.name}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="__new">+ Create new...</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-              <FormField
-                control={form.control}
-                name="notes"
-                render={({ field }) => (
-                  <FormItem className="md:col-span-2">
-                    <FormLabel>Notes</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Optional notes…"
-                        className="min-h-25"
-                        {...field}
-                        disabled={isSubmitting}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+          {form.watch("categoryId") === "__new" && (
+            <FormField
+              control={form.control}
+              name="newCategoryName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>New category name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g. Compliance"
+                      {...field}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+        </div>
 
-            {/* File upload */}
-            <div className="space-y-2">
-              <div className="text-sm font-medium">File (optional)</div>
-              <Input
+        {/* Details */}
+        <div className="rounded-xl border border-border/60 bg-card/80 p-5 shadow-sm space-y-5">
+          <FormField
+            control={form.control}
+            name="tagsText"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tags</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. vehicle, insurance, yearly"
+                    {...field}
+                    disabled={isSubmitting}
+                  />
+                </FormControl>
+                <p className="text-xs text-muted-foreground">
+                  Separate tags with commas.
+                </p>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="notes"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Notes</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Optional notes..."
+                    className="min-h-25 resize-none"
+                    {...field}
+                    disabled={isSubmitting}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* File upload */}
+          <div className="space-y-2">
+            <div className="text-sm font-medium">File (optional)</div>
+            <label
+              className={cn(
+                "flex cursor-pointer items-center gap-3 rounded-lg border border-dashed border-border/60 px-4 py-3 text-sm transition-colors hover:border-primary/40 hover:bg-primary/5",
+                isSubmitting && "pointer-events-none opacity-50",
+              )}
+            >
+              <Upload className="h-4 w-4 text-muted-foreground" />
+              <span className="text-muted-foreground">
+                {file ? file.name : "Choose a file..."}
+              </span>
+              <input
                 type="file"
+                className="sr-only"
                 disabled={isSubmitting}
                 accept={[
                   ".pdf",
@@ -316,47 +323,45 @@ export function NewDocumentForm() {
                 ].join(",")}
                 onChange={(e) => setFile(e.target.files?.[0] ?? null)}
               />
+            </label>
+            <p className="text-xs text-muted-foreground">
+              PDF, Word, PNG, JPEG, or WEBP.
+            </p>
+
+            {file && (
               <p className="text-xs text-muted-foreground">
-                Supported formats: PDF, Word, PNG, JPEG, WEBP.
+                Selected:{" "}
+                <span className="font-medium text-foreground">{file.name}</span>{" "}
+                ({Math.ceil(file.size / 1024)} KB)
               </p>
+            )}
+          </div>
+        </div>
 
-              {file ? (
-                <p className="text-xs text-muted-foreground">
-                  Selected:{" "}
-                  <span className="font-medium text-foreground">{file.name}</span>{" "}
-                  <span className="text-muted-foreground">
-                    ({Math.ceil(file.size / 1024)} KB)
-                  </span>
-                </p>
-              ) : null}
-            </div>
+        {/* Actions */}
+        <div className="flex items-center justify-end gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={isSubmitting}
+            onClick={() => (window.location.href = "/documents")}
+          >
+            Cancel
+          </Button>
 
-            {/* Actions */}
-            <div className="flex items-center justify-end gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                disabled={isSubmitting}
-                onClick={() => (window.location.href = "/documents")}
-              >
-                Cancel
-              </Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {createMutation.isPending
+              ? "Saving..."
+              : isUploading
+                ? "Uploading..."
+                : "Save document"}
+          </Button>
+        </div>
 
-              <Button type="submit" disabled={isSubmitting}>
-                {createMutation.isPending
-                  ? "Saving…"
-                  : isUploading
-                    ? "Uploading…"
-                    : "Save document"}
-              </Button>
-            </div>
-
-            {createMutation.error ? (
-              <p className="text-sm text-destructive">{createMutation.error.message}</p>
-            ) : null}
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+        {createMutation.error && (
+          <p className="text-sm text-destructive">{createMutation.error.message}</p>
+        )}
+      </form>
+    </Form>
   );
 }

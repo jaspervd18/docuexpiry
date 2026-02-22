@@ -34,11 +34,13 @@ export function DashboardShell({
   plan,
   documentCount,
   documentLimit,
+  flush,
 }: {
   children: React.ReactNode;
   plan: string;
   documentCount: number;
   documentLimit: number;
+  flush?: boolean;
 }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -109,7 +111,14 @@ export function DashboardShell({
           </Button>
         </div>
 
-        <main className="mx-auto w-full max-w-5xl px-4 py-6 lg:px-8 lg:py-8">
+        <main
+          className={cn(
+            "w-full",
+            flush
+              ? "px-4 py-4 lg:px-6 lg:py-5"
+              : "mx-auto max-w-5xl px-4 py-6 lg:px-8 lg:py-8",
+          )}
+        >
           {children}
         </main>
       </div>
