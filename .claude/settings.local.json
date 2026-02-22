@@ -5,7 +5,8 @@
       "Bash(cd:*)",
       "Bash(openssl rand:*)",
       "Bash(curl:*)",
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "Bash(grep:*)"
     ]
   }
 }

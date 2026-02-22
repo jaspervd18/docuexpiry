@@ -1,4 +1,4 @@
-import { AppShell } from "~/components/app-shell";
+import { AppShellWithSidebar } from "~/components/app-shell";
 import { BillingContent } from "~/components/billing-content";
 import { api, HydrateClient } from "~/trpc/server";
 
@@ -7,7 +7,7 @@ export default async function BillingPage() {
 
   return (
     <HydrateClient>
-      <AppShell>
+      <AppShellWithSidebar>
         <div className="space-y-6">
           <header className="space-y-1">
             <h1 className="text-3xl font-semibold tracking-tight">Billing</h1>
@@ -18,7 +18,7 @@ export default async function BillingPage() {
 
           <BillingContent />
         </div>
-      </AppShell>
+      </AppShellWithSidebar>
     </HydrateClient>
   );
 }

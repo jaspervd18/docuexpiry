@@ -1,4 +1,4 @@
-import { AppShell } from "~/components/app-shell";
+import { AppShellWithSidebar } from "~/components/app-shell";
 import { NotificationSettingsForm } from "~/components/notification-settings-form";
 import { api, HydrateClient } from "~/trpc/server";
 
@@ -7,7 +7,7 @@ export default async function NotificationSettingsPage() {
 
   return (
     <HydrateClient>
-      <AppShell>
+      <AppShellWithSidebar>
         <div className="space-y-6">
           <header className="space-y-1">
             <h1 className="text-3xl font-semibold tracking-tight">
@@ -21,7 +21,7 @@ export default async function NotificationSettingsPage() {
 
           <NotificationSettingsForm />
         </div>
-      </AppShell>
+      </AppShellWithSidebar>
     </HydrateClient>
   );
 }

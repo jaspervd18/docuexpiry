@@ -1,9 +1,9 @@
-import { AppShell } from "~/components/app-shell";
+import { AppShellWithSidebar } from "~/components/app-shell";
 import { DocumentsTable } from "~/components/documents-table";
 
 export default async function DocumentsPage() {
   return (
-    <AppShell>
+    <AppShellWithSidebar>
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight">Documents</h1>
@@ -16,6 +16,6 @@ export default async function DocumentsPage() {
       <div className="mt-6">
         <DocumentsTable />
       </div>
-    </AppShell>
+    </AppShellWithSidebar>
   );
 }
