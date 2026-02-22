@@ -317,7 +317,7 @@ export function NewDocumentForm() {
                 onChange={(e) => setFile(e.target.files?.[0] ?? null)}
               />
               <p className="text-xs text-muted-foreground">
-                PDF, Word, or images. Stored in blob storage; metadata stays in Postgres.
+                Supported formats: PDF, Word, PNG, JPEG, WEBP.
               </p>
 
               {file ? (

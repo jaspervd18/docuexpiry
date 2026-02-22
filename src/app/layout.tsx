@@ -6,9 +6,32 @@ import { Geist } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
-  title: "DocuExpiry",
-  description: "Track document expirations. Get reminders. Stay compliant.",
+  title: {
+    default: "DocuExpiry - Never miss a document expiration",
+    template: "%s | DocuExpiry",
+  },
+  description:
+    "Track passports, insurance, licences, and contracts. Get reminded before they expire. Free for up to 10 documents.",
+  metadataBase: new URL("https://docuexpiry.com"),
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  openGraph: {
+    type: "website",
+    siteName: "DocuExpiry",
+    title: "DocuExpiry - Never miss a document expiration",
+    description:
+      "Track passports, insurance, licences, and contracts. Get reminded before they expire. Free for up to 10 documents.",
+    url: "https://docuexpiry.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DocuExpiry - Never miss a document expiration",
+    description:
+      "Track passports, insurance, licences, and contracts. Get reminded before they expire.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const geist = Geist({
