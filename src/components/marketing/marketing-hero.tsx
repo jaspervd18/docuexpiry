@@ -27,21 +27,21 @@ export function MarketingHero(props: { signInHref: string }) {
             <Reveal>
               <div className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-sm">
                 <span className="inline-flex h-2 w-2 rounded-full bg-primary" />
-                Track expirations. Prevent surprises.
+                Never get caught off guard.
               </div>
             </Reveal>
 
             <Reveal delay={0.05}>
               <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-                Never miss a document expiration again.
+                Never get caught with an expired document.
               </h1>
             </Reveal>
 
             <Reveal delay={0.1}>
               <p className="text-pretty text-base text-muted-foreground sm:text-lg">
-                DocuExpiry keeps your certificates, licenses, contracts, and
-                compliance docs organized - then nudges you before they expire.
-                Built for solo operators and small teams.
+                Passports, car insurance, business licences, contracts —
+                DocuExpiry tracks them all and reminds you before it&#39;s too
+                late. Set up in 2 minutes.
               </p>
             </Reveal>
 
@@ -60,7 +60,7 @@ export function MarketingHero(props: { signInHref: string }) {
                 </Button>
 
                 <div className="text-xs text-muted-foreground sm:ml-2">
-                  Start free, no credit card required.
+                  Free forever for up to 10 documents.
                 </div>
               </div>
             </Reveal>
@@ -100,19 +100,19 @@ export function MarketingHero(props: { signInHref: string }) {
               </CardHeader>
               <CardContent className="space-y-3">
                 <DemoRow
-                  name="Insurance certificate"
+                  name="Passport"
+                  meta="Identity"
+                  expiresAt={daysFromNow(18)}
+                />
+                <DemoRow
+                  name="Car insurance"
                   meta="Vehicle"
-                  expiresAt={daysFromNow(12)}
+                  expiresAt={daysFromNow(5)}
                 />
                 <DemoRow
-                  name="Safety inspection"
+                  name="ISO 27001 certificate"
                   meta="Compliance"
-                  expiresAt={daysFromNow(80)}
-                />
-                <DemoRow
-                  name="ISO audit report"
-                  meta="Compliance"
-                  expiresAt={daysFromNow(-4)}
+                  expiresAt={daysFromNow(-3)}
                 />
                 <Separator />
                 <div className="flex items-center justify-between text-sm">

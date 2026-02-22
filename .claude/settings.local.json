@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(head:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(openssl rand:*)",
+      "Bash(curl:*)",
+      "Bash(xxd:*)"
     ]
   }
 }

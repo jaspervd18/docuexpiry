@@ -9,12 +9,12 @@ export function MarketingSeoBlock() {
       <RevealStagger className="grid gap-10 lg:grid-cols-2">
         <Reveal className="space-y-3">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            Document expiration tracking for small businesses
+            Stop forgetting, start tracking
           </h2>
           <p className="text-muted-foreground">
-            Whether it’s insurance certificates, safety inspections, compliance
-            docs, or client contracts—DocuExpiry helps you stay ahead. Keep
-            everything searchable, categorized, and easy to audit.
+            Whether it&#39;s your passport, car insurance, a client contract, or
+            an ISO certificate — DocuExpiry gives you one place to track it all.
+            Add a name and a date, and we&#39;ll remind you before it&#39;s too late.
           </p>
           <ul className="space-y-2 text-sm">
             <li className="flex items-start gap-2">
@@ -27,7 +27,7 @@ export function MarketingSeoBlock() {
             </li>
             <li className="flex items-start gap-2">
               <Check className="mt-0.5 h-4 w-4 text-primary" />
-              Build an “audit-ready” habit from day one.
+              Works for personal docs and business compliance.
             </li>
           </ul>
         </Reveal>
@@ -46,16 +46,16 @@ export function MarketingSeoBlock() {
             <div className="text-sm font-medium">Popular use cases</div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <UseCase
-                title="Insurance & certificates"
-                desc="Track renewals for vehicles, equipment, and liability."
+                title="Personal documents"
+                desc="Passports, driving licences, ID cards, visas."
               />
               <UseCase
                 title="Compliance docs"
                 desc="ISO, safety checks, training, site access permits."
               />
               <UseCase
-                title="Client contracts"
-                desc="Know when agreements end or auto-renew."
+                title="Insurance & vehicles"
+                desc="Car insurance, MOT, road tax, equipment cover."
               />
               <UseCase
                 title="Licenses"
@@ -71,7 +71,7 @@ export function MarketingSeoBlock() {
 
 function UseCase(props: { title: string; desc: string }) {
   return (
-    <div className="rounded-2xl border border-border/40 bg-background/60 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5hover:shadow-md">
+    <div className="rounded-2xl border border-border/40 bg-background/60 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5 hover:shadow-md">
       <div className="text-sm font-medium">{props.title}</div>
       <div className="mt-1 text-xs text-muted-foreground">{props.desc}</div>
     </div>

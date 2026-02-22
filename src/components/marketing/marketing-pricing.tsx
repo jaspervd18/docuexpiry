@@ -33,7 +33,7 @@ export function MarketingPricing(props: { signInHref: string }) {
               highlights={[
                 "Up to 10 documents",
                 "Categories + tags",
-                "Dashboard + table view",
+                "Email reminders",
               ]}
               cta="Start free"
               href={signInHref}
@@ -48,8 +48,8 @@ export function MarketingPricing(props: { signInHref: string }) {
               subtitle="For one-person businesses"
               highlights={[
                 "Up to 200 documents",
-                "Expiring soon alerts",
-                "Priority roadmap voting",
+                "Custom reminder schedule",
+                "CSV import (coming soon)",
               ]}
               cta="Go Solo"
               href={signInHref}
@@ -64,7 +64,7 @@ export function MarketingPricing(props: { signInHref: string }) {
               subtitle="For small teams"
               highlights={[
                 "Up to 2,000 documents",
-                "Shared workspace",
+                "Shared workspace (coming soon)",
                 "Roles + access control (soon)",
               ]}
               cta="Start Team"

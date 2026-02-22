@@ -13,10 +13,10 @@ export function MarketingFeatures() {
         <Reveal className="mb-8 flex items-end justify-between gap-4">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              Everything you need, nothing you don’t
+              Simple by design
             </h2>
             <p className="text-muted-foreground">
-              Fast, focused, and built for small businesses.
+              Add a document in 30 seconds. Get reminded before it expires.
             </p>
           </div>
         </Reveal>
@@ -25,15 +25,15 @@ export function MarketingFeatures() {
           <Reveal>
             <FeatureCard
               icon={<Sparkles className="h-5 w-5 text-primary" />}
-              title="Quick add"
-              desc="Add a document name and an expiry date, that's it."
+              title="30-second setup"
+              desc="Just a name, a category, and an expiry date."
             />
           </Reveal>
           <Reveal>
             <FeatureCard
               icon={<BellRing className="h-5 w-5 text-primary" />}
-              title="Expiring soon view"
-              desc="Instantly see what needs attention this month."
+              title="Email reminders"
+              desc="Get notified 30, 7, and 1 day before expiry. Automatically."
             />
           </Reveal>
           <Reveal>
@@ -60,8 +60,8 @@ export function MarketingFeatures() {
           <Reveal>
             <FeatureCard
               icon={<ArrowRight className="h-5 w-5 text-primary" />}
-              title="Built to scale"
-              desc="tRPC + Prisma + Next.js app router. Add team support when needed."
+              title="Works for everything"
+              desc="Passports, contracts, insurance, licences — if it expires, it belongs here."
             />
           </Reveal>
         </div>
