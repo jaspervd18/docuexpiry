@@ -35,6 +35,16 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "~/components/ui/alert-dialog";
 
 const SortBySchema = z.enum(["name", "expiresAt", "createdAt", "category"]);
 type SortBy = z.infer<typeof SortBySchema>;
@@ -55,6 +65,11 @@ export function DocumentsTable() {
 
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState<number>(20);
+
+  const [deleteTarget, setDeleteTarget] = React.useState<{
+    id: string;
+    name: string;
+  } | null>(null);
 
   const listQuery = api.document.list.useQuery(
     {
@@ -201,7 +216,7 @@ export function DocumentsTable() {
               >
                 {/* Main info */}
                 <Link
-                  href={`/documents/${doc.id}`}
+                  href={`/documents/${doc.id}/edit`}
                   className="flex min-w-0 flex-1 items-center gap-4"
                 >
                   <div className="min-w-0 flex-1">
@@ -252,21 +267,14 @@ export function DocumentsTable() {
 
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem asChild>
-                      <Link href={`/documents/${doc.id}`}>View</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
                       <Link href={`/documents/${doc.id}/edit`}>Edit</Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       className="text-destructive focus:text-destructive"
-                      onClick={() => {
-                        const ok = window.confirm(
-                          `Delete "${doc.name}"? This can't be undone.`,
-                        );
-                        if (!ok) return;
-                        deleteMutation.mutate({ id: doc.id });
-                      }}
+                      onClick={() =>
+                        setDeleteTarget({ id: doc.id, name: doc.name })
+                      }
                     >
                       Delete
                     </DropdownMenuItem>
@@ -360,6 +368,39 @@ export function DocumentsTable() {
           </Pagination>
         </div>
       ) : null}
+
+      {/* Delete confirmation dialog */}
+      <AlertDialog
+        open={!!deleteTarget}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete document</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete{" "}
+              <span className="font-medium text-foreground">
+                {deleteTarget?.name}
+              </span>
+              ? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              onClick={() => {
+                if (deleteTarget) {
+                  deleteMutation.mutate({ id: deleteTarget.id });
+                  setDeleteTarget(null);
+                }
+              }}
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

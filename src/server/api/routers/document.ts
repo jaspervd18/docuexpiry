@@ -192,6 +192,114 @@ export const documentRouter = createTRPCRouter({
         totalPages,
       };
     }),
+  getById: protectedProcedure
+    .input(z.object({ id: z.string().cuid() }))
+    .query(async ({ ctx, input }) => {
+      const doc = await ctx.db.document.findFirst({
+        where: { id: input.id, userId: ctx.session.user.id },
+        select: {
+          id: true,
+          name: true,
+          expiresAt: true,
+          notes: true,
+          categoryId: true,
+          category: { select: { id: true, name: true } },
+          tags: { select: { tag: { select: { id: true, name: true } } } },
+          fileUrl: true,
+          fileName: true,
+          fileSize: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      });
+
+      if (!doc) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Document not found" });
+      }
+
+      return doc;
+    }),
+
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().cuid(),
+        name: z.string().min(1).max(200),
+        expiresAt: z.date(),
+        notes: z.string().max(5000).optional(),
+        categoryId: z.string().cuid().optional(),
+        newCategoryName: z.string().max(80).optional(),
+        tagIds: z.array(z.string().cuid()).optional(),
+        newTagNames: z.array(z.string().max(40)).optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+
+      const existing = await ctx.db.document.findFirst({
+        where: { id: input.id, userId },
+        select: { id: true },
+      });
+
+      if (!existing) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Document not found" });
+      }
+
+      const name = normalizeName(input.name);
+      const notes = input.notes?.trim() ?? null;
+
+      // Handle category
+      let categoryId: string | null = input.categoryId ?? null;
+
+      const newCategoryName = input.newCategoryName?.trim();
+      if (!categoryId && newCategoryName) {
+        const category = await ctx.db.category.upsert({
+          where: { userId_name: { userId, name: newCategoryName } },
+          update: {},
+          create: { userId, name: newCategoryName },
+          select: { id: true },
+        });
+        categoryId = category.id;
+      }
+
+      // Handle tags: collect all tag IDs
+      const tagIds = new Set<string>(input.tagIds ?? []);
+      const newTagNames = (input.newTagNames ?? [])
+        .map((t) => normalizeName(t))
+        .filter((t) => t.length > 0);
+
+      if (newTagNames.length > 0) {
+        const createdOrExisting = await Promise.all(
+          newTagNames.map((tagName) =>
+            ctx.db.tag.upsert({
+              where: { userId_name: { userId, name: tagName } },
+              update: {},
+              create: { userId, name: tagName },
+              select: { id: true },
+            }),
+          ),
+        );
+        for (const t of createdOrExisting) tagIds.add(t.id);
+      }
+
+      // Delete old tag associations and recreate
+      await ctx.db.documentTag.deleteMany({ where: { documentId: input.id } });
+
+      return ctx.db.document.update({
+        where: { id: input.id },
+        data: {
+          name,
+          expiresAt: input.expiresAt,
+          notes,
+          categoryId,
+          tags: {
+            create: Array.from(tagIds).map((id) => ({ tagId: id })),
+          },
+        },
+        select: { id: true },
+      });
+    }),
+
   delete: protectedProcedure
     .input(z.object({ id: z.string().cuid() }))
     .mutation(async ({ ctx, input }) => {
