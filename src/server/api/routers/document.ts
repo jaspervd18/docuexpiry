@@ -317,4 +317,83 @@ export const documentRouter = createTRPCRouter({
       await ctx.db.document.delete({ where: { id: input.id } });
       return { ok: true };
     }),
+
+  bulkCreate: protectedProcedure
+    .input(
+      z.object({
+        documents: z
+          .array(
+            z.object({
+              name: z.string().min(1).max(200),
+              expiresAt: z.date(),
+              notes: z.string().max(5000).optional(),
+              categoryName: z.string().max(80).optional(),
+            }),
+          )
+          .min(1)
+          .max(500),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+
+      const plan = ctx.session.user.plan ?? "free";
+      if (plan === "free") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "CSV import is available on Solo and Team plans.",
+        });
+      }
+
+      const limit = getDocumentLimit(plan);
+      const currentCount = await ctx.db.document.count({ where: { userId } });
+      const available = limit - currentCount;
+
+      if (available <= 0) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: `Document limit reached (${limit}). Upgrade your plan to add more.`,
+        });
+      }
+
+      const toCreate = input.documents.slice(0, available);
+
+      // Collect unique category names and upsert them
+      const categoryNames = [
+        ...new Set(
+          toCreate
+            .map((d) => d.categoryName?.trim())
+            .filter((n): n is string => !!n && n.length > 0),
+        ),
+      ];
+
+      const categoryMap = new Map<string, string>();
+      for (const name of categoryNames) {
+        const cat = await ctx.db.category.upsert({
+          where: { userId_name: { userId, name } },
+          update: {},
+          create: { userId, name },
+          select: { id: true },
+        });
+        categoryMap.set(name, cat.id);
+      }
+
+      // Bulk insert documents
+      const created = await ctx.db.document.createMany({
+        data: toCreate.map((d) => ({
+          userId,
+          name: d.name.trim(),
+          expiresAt: d.expiresAt,
+          notes: d.notes?.trim() || null,
+          categoryId: d.categoryName
+            ? (categoryMap.get(d.categoryName.trim()) ?? null)
+            : null,
+        })),
+      });
+
+      return {
+        imported: created.count,
+        skipped: input.documents.length - toCreate.length,
+      };
+    }),
 });

@@ -3,7 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { upload } from "@vercel/blob/client";
 import { format } from "date-fns";
-import { CalendarIcon, Upload } from "lucide-react";
+import { CalendarIcon, Sparkles, Upload } from "lucide-react";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,6 +31,14 @@ import {
 } from "~/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
 import { Calendar } from "~/components/ui/calendar";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "~/components/ui/dialog";
 import { cn } from "~/lib/utils";
 
 const schema = z.object({
@@ -57,9 +66,11 @@ export function NewDocumentForm() {
 
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [upgradePrompt, setUpgradePrompt] = useState<{ count: number; limit: number } | null>(null);
 
   const categoriesQuery = api.document.listCategories.useQuery();
   const tagsQuery = api.document.listTags.useQuery();
+  const planQuery = api.subscription.getStatus.useQuery(undefined, { staleTime: 60_000 });
 
   const categories = categoriesQuery.data ?? [];
   const knownTags = tagsQuery.data ?? [];
@@ -101,6 +112,18 @@ export function NewDocumentForm() {
 
         await utils.document.listCategories.invalidate();
         await utils.document.listTags.invalidate();
+
+        // Check if user is approaching their document limit (free plan)
+        const status = planQuery.data;
+        if (status && status.plan === "free") {
+          const newCount = status.documentCount + 1;
+          const remaining = status.documentLimit - newCount;
+          // Show prompt when 3 or fewer slots remaining
+          if (remaining <= 3) {
+            setUpgradePrompt({ count: newCount, limit: status.documentLimit });
+            return; // Don't redirect yet, show prompt first
+          }
+        }
 
         window.location.href = "/documents";
       } finally {
@@ -362,6 +385,56 @@ export function NewDocumentForm() {
           <p className="text-sm text-destructive">{createMutation.error.message}</p>
         )}
       </form>
+
+      {/* Approaching limit upgrade prompt */}
+      <Dialog
+        open={!!upgradePrompt}
+        onOpenChange={(open) => {
+          if (!open) {
+            setUpgradePrompt(null);
+            window.location.href = "/documents";
+          }
+        }}
+      >
+        <DialogContent className="sm:max-w-md" showCloseButton={false}>
+          <DialogHeader>
+            <DialogTitle>Document saved!</DialogTitle>
+            <DialogDescription>
+              {upgradePrompt && upgradePrompt.count >= upgradePrompt.limit
+                ? `You've reached your free plan limit of ${upgradePrompt.limit} documents. Upgrade to keep adding more.`
+                : `You're using ${upgradePrompt?.count} of ${upgradePrompt?.limit} documents on the free plan. Upgrade to unlock more space and premium features.`}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="rounded-lg border border-border/60 bg-muted/30 p-4 space-y-2">
+            <div className="flex items-center gap-2 text-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span>Up to 200 documents (Solo) or 2,000 (Team)</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span>Bulk CSV import</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span>Automatic email reminders before expiry</span>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setUpgradePrompt(null);
+                window.location.href = "/documents";
+              }}
+            >
+              Continue on free
+            </Button>
+            <Button asChild>
+              <Link href="/dashboard/billing">View plans</Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Form>
   );
 }

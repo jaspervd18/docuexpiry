@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import { ArrowUpDown, MoreHorizontal, Search } from "lucide-react";
+import { ArrowUpDown, Lock, MoreHorizontal, Search, Sparkles, Upload } from "lucide-react";
 import { z } from "zod";
 
 import { api } from "~/trpc/react";
@@ -45,6 +45,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "~/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "~/components/ui/dialog";
+import { CsvImportModal } from "~/components/csv-import-modal";
 
 const SortBySchema = z.enum(["name", "expiresAt", "createdAt", "category"]);
 type SortBy = z.infer<typeof SortBySchema>;
@@ -70,6 +79,13 @@ export function DocumentsTable() {
     id: string;
     name: string;
   } | null>(null);
+
+  const [csvOpen, setCsvOpen] = React.useState(false);
+  const [upgradeOpen, setUpgradeOpen] = React.useState(false);
+  const planQuery = api.subscription.getStatus.useQuery(undefined, {
+    staleTime: 60_000,
+  });
+  const plan = planQuery.data?.plan ?? "free";
 
   const listQuery = api.document.list.useQuery(
     {
@@ -188,6 +204,15 @@ export function DocumentsTable() {
           <div className="text-sm text-muted-foreground tabular-nums">
             {listQuery.isFetching ? "Updating..." : `${result?.total ?? 0} docs`}
           </div>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => plan === "free" ? setUpgradeOpen(true) : setCsvOpen(true)}
+          >
+            <Upload className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Import CSV</span>
+          </Button>
 
           <Button asChild size="sm">
             <Link href="/documents/new">Add document</Link>
@@ -368,6 +393,48 @@ export function DocumentsTable() {
           </Pagination>
         </div>
       ) : null}
+
+      {/* CSV import modal */}
+      {plan !== "free" && (
+        <CsvImportModal open={csvOpen} onOpenChange={setCsvOpen} />
+      )}
+
+      {/* Upgrade prompt for free users */}
+      <Dialog open={upgradeOpen} onOpenChange={setUpgradeOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Lock className="h-4 w-4" />
+              CSV import is a paid feature
+            </DialogTitle>
+            <DialogDescription>
+              Upgrade to Solo or Team to bulk-import documents from CSV files, plus enjoy higher document limits and email reminders.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="rounded-lg border border-border/60 bg-muted/30 p-4 space-y-2">
+            <div className="flex items-center gap-2 text-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span>Bulk CSV import (up to 500 at once)</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span>Up to 200 documents (Solo) or 2,000 (Team)</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span>Automatic email reminders before expiry</span>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setUpgradeOpen(false)}>
+              Maybe later
+            </Button>
+            <Button asChild>
+              <Link href="/dashboard/billing">View plans</Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Delete confirmation dialog */}
       <AlertDialog
