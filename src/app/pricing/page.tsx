@@ -3,7 +3,7 @@ import { MarketingNav } from "~/components/marketing/marketing-nav";
 import { PricingComparison } from "./pricing-comparison";
 
 export const metadata: Metadata = {
-  title: "Pricing — DocuExpiry",
+  title: "Pricing | DocuExpiry",
   description:
     "DocuExpiry pricing plans. Free for up to 10 documents. Solo and Team plans for growing businesses.",
 };

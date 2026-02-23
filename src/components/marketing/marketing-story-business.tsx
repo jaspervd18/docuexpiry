@@ -63,7 +63,7 @@ export function MarketingStoryBusiness() {
         </AnimatedHeading>
         <Reveal delay={0.1}>
           <p className="mx-auto max-w-lg text-muted-foreground">
-            From freelancers to teams — if it expires, it belongs in DocuExpiry.
+            From freelancers to teams. If it expires, it belongs in DocuExpiry.
           </p>
         </Reveal>
       </div>

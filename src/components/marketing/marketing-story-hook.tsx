@@ -43,8 +43,8 @@ export function MarketingStoryHook(props: { signInHref: string }) {
         <Reveal delay={0.3}>
           <p className="mx-auto mb-8 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
             You found out at the airport. That trip you planned for months? Gone.
-            DocuExpiry makes sure that never happens again — track every expiry
-            date in one place, get reminded before it&apos;s too late.
+            DocuExpiry makes sure that never happens again. Track every expiry
+            date in one place and get reminded before it&apos;s too late.
           </p>
         </Reveal>
 

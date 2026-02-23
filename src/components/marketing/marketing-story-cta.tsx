@@ -30,7 +30,7 @@ export function MarketingStoryCta(props: { signInHref: string }) {
             <Button asChild size="lg" className="group shadow-sm hover:shadow-md">
               <Link href={props.signInHref} className="relative">
                 <span className="absolute inset-0 -z-10 rounded-md bg-primary/20 blur-md opacity-0 transition-opacity group-hover:opacity-100" />
-                Start free — no credit card needed
+                Start free, no credit card needed
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Button>

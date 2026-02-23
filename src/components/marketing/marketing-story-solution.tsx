@@ -54,7 +54,7 @@ export function MarketingStorySolution() {
             Reminders that actually reach you
           </h3>
           <p className="mb-4 text-sm text-muted-foreground">
-            Get notified 30, 7, and 1 day before expiry — on the channel you
+            Get notified 30, 7, and 1 day before expiry. Pick the channel you
             prefer. Never miss a deadline because you didn&apos;t check your email.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -89,7 +89,7 @@ export function MarketingStorySolution() {
           <BenefitCard
             icon={<BellRing className="h-5 w-5 text-primary" />}
             title="Smart reminders"
-            desc="Customise when you get reminded. 30 days for a passport, 7 days for insurance — you decide."
+            desc="Customise when you get reminded. 30 days for a passport, 7 days for insurance. Your call."
           />
         </Reveal>
         <Reveal>
