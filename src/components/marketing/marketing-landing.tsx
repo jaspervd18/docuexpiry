@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 
+import { MarketingReadyProvider } from "./marketing-ready-provider";
 import { MarketingNav } from "./marketing-nav";
 import { MarketingStoryHook } from "./marketing-story-hook";
 import { MarketingStoryBefore } from "./marketing-story-before";
@@ -26,17 +27,19 @@ export function MarketingLanding(props: {
   const { signInHref } = props;
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <MarketingNav signInHref={signInHref} />
-      <MarketingStoryHook signInHref={signInHref} />
-      <PixiSectionTransition />
-      <MarketingStoryBefore />
-      <MarketingStorySolution />
-      <PixiSectionTransition />
-      <MarketingStoryBusiness />
-      <MarketingSocialProof />
-      <MarketingPricingV2 signInHref={signInHref} />
-      <MarketingStoryCta signInHref={signInHref} />
-    </div>
+    <MarketingReadyProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <MarketingNav signInHref={signInHref} />
+        <MarketingStoryHook signInHref={signInHref} />
+        <PixiSectionTransition />
+        <MarketingStoryBefore />
+        <MarketingStorySolution />
+        <PixiSectionTransition />
+        <MarketingStoryBusiness />
+        <MarketingSocialProof />
+        <MarketingPricingV2 signInHref={signInHref} />
+        <MarketingStoryCta signInHref={signInHref} />
+      </div>
+    </MarketingReadyProvider>
   );
 }

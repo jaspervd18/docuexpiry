@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion, useInView } from "framer-motion";
+import { usePageReady } from "./marketing-ready-provider";
 
 type AnimationStyle = "word-reveal" | "gradient-sweep" | "character-reveal" | "fade-up";
 
@@ -18,8 +19,10 @@ export function AnimatedHeading({
   animation = "fade-up",
   className = "",
 }: AnimatedHeadingProps) {
+  const ready = usePageReady();
   const ref = React.useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
+  const active = ready && inView;
 
   if (animation === "word-reveal") {
     const words = children.split(" ");
@@ -29,7 +32,7 @@ export function AnimatedHeading({
           ref={ref}
           className="inline-flex flex-wrap gap-x-[0.3em]"
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
+          animate={active ? "show" : "hidden"}
           variants={{ show: { transition: { staggerChildren: 0.06 } } }}
         >
           {words.map((word, i) => (
@@ -55,7 +58,7 @@ export function AnimatedHeading({
         <motion.span
           className="inline-block bg-gradient-to-r from-primary via-foreground to-foreground bg-[length:200%_100%] bg-clip-text text-transparent"
           initial={{ backgroundPosition: "100% 0" }}
-          animate={inView ? { backgroundPosition: "0% 0" } : { backgroundPosition: "100% 0" }}
+          animate={active ? { backgroundPosition: "0% 0" } : { backgroundPosition: "100% 0" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           {children}
@@ -73,7 +76,7 @@ export function AnimatedHeading({
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 14 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+      animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Tag className={className}>{children}</Tag>
@@ -94,12 +97,16 @@ function CharacterRevealHeading({
   className: string;
   text: string;
 }) {
+  const ready = usePageReady();
   const ref = React.useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
+  const active = ready && inView;
   const [display, setDisplay] = React.useState(text);
+  const hasAnimated = React.useRef(false);
 
   React.useEffect(() => {
-    if (!inView) return;
+    if (!active || hasAnimated.current) return;
+    hasAnimated.current = true;
 
     let frame = 0;
     const totalFrames = 20;
@@ -123,19 +130,19 @@ function CharacterRevealHeading({
     }, 35);
 
     return () => clearInterval(id);
-  }, [inView, text]);
+  }, [active, text]);
 
   return (
     <div ref={ref}>
-    <Tag className={className}>
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        {display}
-      </motion.span>
-    </Tag>
+      <Tag className={className}>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={active ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {display}
+        </motion.span>
+      </Tag>
     </div>
   );
 }
