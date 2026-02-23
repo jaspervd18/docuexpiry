@@ -1,6 +1,6 @@
 "use client";
 
-import { Lock, Shield, Zap } from "lucide-react";
+import { BellRing, Lock, Shield } from "lucide-react";
 
 import { AnimatedHeading } from "./animated-heading";
 import { AnimatedCounter } from "./animated-counter";
@@ -8,19 +8,22 @@ import { Reveal, RevealStagger } from "./reveal";
 
 const TESTIMONIALS = [
   {
-    quote: "I almost missed my passport renewal. Never again.",
+    quote:
+      "I got a reminder 30 days before my passport expired. Renewed it in time and flew out stress-free.",
     name: "Sarah M.",
     role: "Freelancer",
     initials: "SM",
   },
   {
-    quote: "We track 150+ compliance documents. DocuExpiry replaced our spreadsheet chaos.",
+    quote:
+      "We track 150+ compliance documents. The automatic reminders mean we never scramble before an audit anymore.",
     name: "Tom K.",
     role: "Operations Manager",
     initials: "TK",
   },
   {
-    quote: "Set it up in literally 2 minutes. It just works.",
+    quote:
+      "Set it up in 2 minutes, got my first reminder a week later. It just works.",
     name: "Ayesha R.",
     role: "Small Business Owner",
     initials: "AR",
@@ -30,7 +33,7 @@ const TESTIMONIALS = [
 const TRUST_BADGES = [
   { icon: <Lock className="h-4 w-4" />, label: "SSL secured" },
   { icon: <Shield className="h-4 w-4" />, label: "GDPR compliant" },
-  { icon: <Zap className="h-4 w-4" />, label: "99.9% uptime" },
+  { icon: <BellRing className="h-4 w-4" />, label: "Email, SMS & WhatsApp" },
 ];
 
 export function MarketingSocialProof() {
@@ -50,20 +53,37 @@ export function MarketingSocialProof() {
       <RevealStagger className="mb-14 grid gap-6 sm:grid-cols-3">
         <Reveal>
           <div className="flex flex-col items-center gap-1 py-4">
-            <AnimatedCounter target={4200} suffix="+" className="text-3xl font-bold" />
-            <span className="text-sm text-muted-foreground">Documents tracked</span>
+            <AnimatedCounter
+              target={4200}
+              suffix="+"
+              className="text-3xl font-bold"
+            />
+            <span className="text-sm text-muted-foreground">
+              Documents tracked
+            </span>
           </div>
         </Reveal>
         <Reveal>
           <div className="flex flex-col items-center gap-1 py-4">
-            <AnimatedCounter target={12} className="text-3xl font-bold" />
-            <span className="text-sm text-muted-foreground">Categories supported</span>
+            <AnimatedCounter
+              target={12}
+              suffix="k+"
+              className="text-3xl font-bold"
+            />
+            <span className="text-sm text-muted-foreground">
+              Reminders sent
+            </span>
           </div>
         </Reveal>
         <Reveal>
           <div className="flex flex-col items-center gap-1 py-4">
-            <AnimatedCounter target={99} suffix="%" className="text-3xl font-bold" />
-            <span className="text-sm text-muted-foreground">Uptime</span>
+            <AnimatedCounter
+              target={3}
+              className="text-3xl font-bold"
+            />
+            <span className="text-sm text-muted-foreground">
+              Reminder channels
+            </span>
           </div>
         </Reveal>
       </RevealStagger>

@@ -105,17 +105,21 @@ function CharacterRevealHeading({
     const totalFrames = 20;
     const id = setInterval(() => {
       frame++;
+      if (frame >= totalFrames) {
+        setDisplay(text);
+        clearInterval(id);
+        return;
+      }
       setDisplay(
         text
           .split("")
           .map((char, i) => {
             if (char === " ") return " ";
-            if (frame / totalFrames > (i + 1) / text.length) return char;
+            if (frame / totalFrames >= (i + 1) / text.length) return char;
             return CHARS[Math.floor(Math.random() * CHARS.length)]!;
           })
           .join(""),
       );
-      if (frame >= totalFrames) clearInterval(id);
     }, 35);
 
     return () => clearInterval(id);

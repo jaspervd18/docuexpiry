@@ -7,14 +7,6 @@ import { PLAN_FEATURES, type FeatureValue } from "~/lib/plans";
 import { Reveal, RevealStagger } from "~/components/marketing/reveal";
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "~/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 const PLANS_META = [
@@ -25,12 +17,22 @@ const PLANS_META = [
 
 function FeatureCell({ value }: { value: FeatureValue }) {
   if (value === true) {
-    return <Check className="mx-auto h-4 w-4 text-primary" />;
+    return (
+      <div className="flex justify-center">
+        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15">
+          <Check className="h-3.5 w-3.5 text-primary" />
+        </div>
+      </div>
+    );
   }
   if (value === false) {
-    return <Minus className="mx-auto h-4 w-4 text-muted-foreground/40" />;
+    return (
+      <div className="flex justify-center">
+        <Minus className="h-4 w-4 text-muted-foreground/30" />
+      </div>
+    );
   }
-  return <span className="text-sm">{value}</span>;
+  return <span className="text-sm font-medium">{value}</span>;
 }
 
 export function PricingComparison(props: { signInHref: string }) {
@@ -97,40 +99,54 @@ export function PricingComparison(props: { signInHref: string }) {
 
       {/* Feature comparison table — desktop */}
       <Reveal>
-        <div className="hidden overflow-hidden rounded-2xl border border-border/60 sm:block">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-card/80">
-                <TableHead className="w-[40%] font-medium">Feature</TableHead>
-                <TableHead className="text-center font-medium">Free</TableHead>
-                <TableHead className="text-center font-medium">
+        <div className="hidden overflow-hidden rounded-2xl border border-border/60 bg-card/50 sm:block">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-border/60 bg-card/80">
+                <th className="px-6 py-4 text-left text-sm font-semibold">
+                  Feature
+                </th>
+                <th className="px-6 py-4 text-center text-sm font-semibold">
+                  Free
+                </th>
+                <th className="px-6 py-4 text-center text-sm font-semibold">
                   <span className="inline-flex items-center gap-1.5">
                     Solo
                     <Badge variant="secondary" className="text-[10px]">
                       Popular
                     </Badge>
                   </span>
-                </TableHead>
-                <TableHead className="text-center font-medium">Team</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {PLAN_FEATURES.map((feature) => (
-                <TableRow key={feature.label}>
-                  <TableCell className="font-medium">{feature.label}</TableCell>
-                  <TableCell className="text-center">
+                </th>
+                <th className="px-6 py-4 text-center text-sm font-semibold">
+                  Team
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {PLAN_FEATURES.map((feature, i) => (
+                <tr
+                  key={feature.label}
+                  className={[
+                    "border-b border-border/40 transition-colors last:border-0 hover:bg-primary/5",
+                    i % 2 === 0 ? "bg-transparent" : "bg-card/30",
+                  ].join(" ")}
+                >
+                  <td className="px-6 py-3.5 text-sm font-medium">
+                    {feature.label}
+                  </td>
+                  <td className="px-6 py-3.5 text-center">
                     <FeatureCell value={feature.free} />
-                  </TableCell>
-                  <TableCell className="text-center">
+                  </td>
+                  <td className="px-6 py-3.5 text-center">
                     <FeatureCell value={feature.solo} />
-                  </TableCell>
-                  <TableCell className="text-center">
+                  </td>
+                  <td className="px-6 py-3.5 text-center">
                     <FeatureCell value={feature.team} />
-                  </TableCell>
-                </TableRow>
+                  </td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
+            </tbody>
+          </table>
         </div>
       </Reveal>
 
@@ -138,21 +154,33 @@ export function PricingComparison(props: { signInHref: string }) {
       <RevealStagger className="space-y-6 sm:hidden">
         {PLANS_META.map((plan) => (
           <Reveal key={plan.key}>
-            <Card className="rounded-2xl">
+            <Card className={[
+              "rounded-2xl",
+              plan.featured ? "border-primary/40 ring-1 ring-primary/20" : "",
+            ].join(" ")}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base">{plan.name}</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base">{plan.name}</CardTitle>
+                    {plan.featured && (
+                      <Badge className="bg-primary text-primary-foreground text-[10px]">
+                        Popular
+                      </Badge>
+                    )}
+                  </div>
                   <span className="text-lg font-semibold">{plan.price}/mo</span>
                 </div>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2.5 text-sm">
                   {PLAN_FEATURES.map((feature) => {
                     const val = feature[plan.key];
                     if (val === false) return null;
                     return (
-                      <li key={feature.label} className="flex items-center gap-2">
-                        <Check className="h-3.5 w-3.5 shrink-0 text-primary" />
+                      <li key={feature.label} className="flex items-center gap-2.5">
+                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15">
+                          <Check className="h-3 w-3 text-primary" />
+                        </div>
                         <span>
                           {feature.label}
                           {typeof val === "string" ? `: ${val}` : ""}
@@ -163,7 +191,7 @@ export function PricingComparison(props: { signInHref: string }) {
                 </ul>
                 <Button
                   asChild
-                  className="mt-4 w-full"
+                  className="mt-5 w-full"
                   variant={plan.featured ? "default" : "outline"}
                 >
                   <Link href={signInHref}>{plan.cta}</Link>

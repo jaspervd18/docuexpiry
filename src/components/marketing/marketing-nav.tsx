@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Sparkles, ArrowRight } from "lucide-react";
 
 import { cn } from "~/lib/utils";
@@ -10,12 +11,7 @@ import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
 import { useActiveSection } from "./use-active-session";
 
-type NavItem = { id: string; label: string; href?: string };
-
-const NAV: NavItem[] = [
-  { id: "features", label: "Features" },
-  { id: "pricing", label: "Pricing" },
-];
+const SECTION_IDS = ["features", "pricing"];
 
 function scrollToId(id: string) {
   const el = document.getElementById(id);
@@ -24,7 +20,9 @@ function scrollToId(id: string) {
 }
 
 export function MarketingNav(props: { signInHref: string }) {
-  const active = useActiveSection(NAV.map((n) => n.id));
+  const pathname = usePathname();
+  const isLanding = pathname === "/";
+  const active = useActiveSection(SECTION_IDS);
 
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
@@ -56,27 +54,42 @@ export function MarketingNav(props: { signInHref: string }) {
         </Link>
 
         <nav className="hidden items-center gap-1 sm:flex">
-          {NAV.map((item) => (
+          {/* Features link — scroll on landing, navigate on other pages */}
+          {isLanding ? (
             <Button
-              key={item.id}
               type="button"
               variant="ghost"
               size="sm"
               className={cn(
                 "text-muted-foreground hover:text-foreground",
-                active === item.id && "bg-primary/10 text-foreground",
+                active === "features" && "bg-primary/10 text-foreground",
               )}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToId(item.id);
-              }}
+              onClick={() => scrollToId("features")}
             >
-              {item.label}
+              Features
             </Button>
-          ))}
+          ) : (
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <Link href="/#features">Features</Link>
+            </Button>
+          )}
 
-          <Button asChild variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-            <Link href="/pricing">Compare plans</Link>
+          {/* Pricing link — always goes to /pricing */}
+          <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className={cn(
+              "text-muted-foreground hover:text-foreground",
+              pathname === "/pricing" && "bg-primary/10 text-foreground",
+            )}
+          >
+            <Link href="/pricing">Pricing</Link>
           </Button>
         </nav>
 

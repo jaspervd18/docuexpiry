@@ -31,7 +31,7 @@ export function MarketingLanding(props: {
       <MarketingStoryHook signInHref={signInHref} />
       <PixiSectionTransition />
       <MarketingStoryBefore />
-      <MarketingStorySolution signInHref={signInHref} />
+      <MarketingStorySolution />
       <PixiSectionTransition />
       <MarketingStoryBusiness />
       <MarketingSocialProof />

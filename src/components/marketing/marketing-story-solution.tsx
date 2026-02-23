@@ -1,6 +1,6 @@
 "use client";
 
-import { BellRing, ShieldCheck, Sparkles } from "lucide-react";
+import { BellRing, Mail, MessageCircle, Smartphone, Sparkles } from "lucide-react";
 import { format } from "date-fns";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -23,7 +23,7 @@ const DEMO_DOCS = [
   { name: "Driving licence", meta: "Identity", expiresAt: daysFromNow(240) },
 ];
 
-export function MarketingStorySolution(_props: { signInHref: string }) {
+export function MarketingStorySolution() {
   return (
     <section id="solution" className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
       <div className="mb-10 text-center">
@@ -47,31 +47,78 @@ export function MarketingStorySolution(_props: { signInHref: string }) {
         <DemoCard />
       </Reveal>
 
+      {/* Reminder channels highlight */}
+      <Reveal delay={0.2}>
+        <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center">
+          <h3 className="mb-2 text-base font-semibold">
+            Reminders that actually reach you
+          </h3>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Get notified 30, 7, and 1 day before expiry — on the channel you
+            prefer. Never miss a deadline because you didn&apos;t check your email.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <ReminderChannel
+              icon={<Mail className="h-4 w-4" />}
+              label="Email"
+            />
+            <ReminderChannel
+              icon={<Smartphone className="h-4 w-4" />}
+              label="SMS"
+              soon
+            />
+            <ReminderChannel
+              icon={<MessageCircle className="h-4 w-4" />}
+              label="WhatsApp"
+              soon
+            />
+          </div>
+        </div>
+      </Reveal>
+
       {/* Benefit cards */}
       <RevealStagger className="mt-12 grid gap-4 sm:grid-cols-3">
         <Reveal>
           <BenefitCard
             icon={<Sparkles className="h-5 w-5 text-primary" />}
             title="Add in seconds"
-            desc="Name, category, expiry date. That's all you need."
+            desc="Name, category, expiry date. That's all you need. No file uploads required."
           />
         </Reveal>
         <Reveal>
           <BenefitCard
             icon={<BellRing className="h-5 w-5 text-primary" />}
-            title="Get reminded"
-            desc="Email alerts at 30, 7, and 1 day before expiry. Automatically."
+            title="Smart reminders"
+            desc="Customise when you get reminded. 30 days for a passport, 7 days for insurance — you decide."
           />
         </Reveal>
         <Reveal>
           <BenefitCard
-            icon={<ShieldCheck className="h-5 w-5 text-primary" />}
-            title="Stay in control"
-            desc="Your dashboard shows what's next at a glance."
+            icon={<Mail className="h-5 w-5 text-primary" />}
+            title="Your inbox, your schedule"
+            desc="Reminders arrive by email. SMS and WhatsApp coming soon so you'll never miss one."
           />
         </Reveal>
       </RevealStagger>
     </section>
+  );
+}
+
+function ReminderChannel(props: {
+  icon: React.ReactNode;
+  label: string;
+  soon?: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-2 rounded-full border border-border/60 bg-card/80 px-4 py-2 text-sm">
+      <span className="text-primary">{props.icon}</span>
+      <span className="font-medium">{props.label}</span>
+      {props.soon && (
+        <span className="rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-medium text-primary">
+          Soon
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -100,7 +147,11 @@ function DemoCard() {
               className="flex items-center justify-between gap-3 rounded-2xl bg-background/40 px-4 py-3 transition-colors hover:bg-primary/5"
               initial={{ opacity: 0, x: -20 }}
               animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ delay: 0.3 + i * 0.12, duration: 0.4, ease: "easeOut" }}
+              transition={{
+                delay: 0.3 + i * 0.12,
+                duration: 0.4,
+                ease: "easeOut",
+              }}
             >
               <div className="min-w-0">
                 <div className="truncate text-sm font-medium">{doc.name}</div>
@@ -142,7 +193,11 @@ function DemoCard() {
   );
 }
 
-function BenefitCard(props: { icon: React.ReactNode; title: string; desc: string }) {
+function BenefitCard(props: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
   return (
     <Card className="group flex h-full flex-col rounded-3xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
       <CardHeader className="space-y-2">
