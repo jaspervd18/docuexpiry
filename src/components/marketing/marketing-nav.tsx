@@ -10,12 +10,11 @@ import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
 import { useActiveSection } from "./use-active-session";
 
-type NavItem = { id: "features" | "pricing" | "faq"; label: string };
+type NavItem = { id: string; label: string; href?: string };
 
 const NAV: NavItem[] = [
   { id: "features", label: "Features" },
   { id: "pricing", label: "Pricing" },
-  { id: "faq", label: "FAQ" },
 ];
 
 function scrollToId(id: string) {
@@ -75,6 +74,10 @@ export function MarketingNav(props: { signInHref: string }) {
               {item.label}
             </Button>
           ))}
+
+          <Button asChild variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+            <Link href="/pricing">Compare plans</Link>
+          </Button>
         </nav>
 
         <div className="flex items-center gap-2">

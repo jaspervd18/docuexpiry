@@ -1,26 +1,42 @@
 "use client";
 
-import { MarketingNav } from "./marketing-nav";
-import { MarketingHero } from "./marketing-hero";
-import { MarketingFeatures } from "./marketing-features";
-import { MarketingSeoBlock } from "./marketing-seo";
-import { MarketingFaq } from "./marketing-faq";
-import { MarketingCtaFooter } from "./marketing-cta-footer";
-import { MarketingPricing } from "./marketing-pricing";
+import dynamic from "next/dynamic";
 
-export function MarketingLanding(props: { signInHref: string; appHref: string }) {
-  // appHref kept for future use (e.g., "Open app" when signed in)
+import { MarketingNav } from "./marketing-nav";
+import { MarketingStoryHook } from "./marketing-story-hook";
+import { MarketingStoryBefore } from "./marketing-story-before";
+import { MarketingStorySolution } from "./marketing-story-solution";
+import { MarketingStoryBusiness } from "./marketing-story-business";
+import { MarketingSocialProof } from "./marketing-social-proof";
+import { MarketingPricingV2 } from "./marketing-pricing-v2";
+import { MarketingStoryCta } from "./marketing-story-cta";
+
+const PixiSectionTransition = dynamic(
+  () =>
+    import("./pixi/pixi-section-transition").then((m) => ({
+      default: m.PixiSectionTransition,
+    })),
+  { ssr: false },
+);
+
+export function MarketingLanding(props: {
+  signInHref: string;
+  appHref: string;
+}) {
   const { signInHref } = props;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <MarketingNav signInHref={signInHref} />
-      <MarketingHero signInHref={signInHref} />
-      <MarketingFeatures />
-      <MarketingPricing signInHref={signInHref} />
-      <MarketingSeoBlock />
-      <MarketingFaq />
-      <MarketingCtaFooter signInHref={signInHref} />
+      <MarketingStoryHook signInHref={signInHref} />
+      <PixiSectionTransition />
+      <MarketingStoryBefore />
+      <MarketingStorySolution signInHref={signInHref} />
+      <PixiSectionTransition />
+      <MarketingStoryBusiness />
+      <MarketingSocialProof />
+      <MarketingPricingV2 signInHref={signInHref} />
+      <MarketingStoryCta signInHref={signInHref} />
     </div>
   );
 }
