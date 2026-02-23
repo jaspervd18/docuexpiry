@@ -14,18 +14,20 @@ const SESSION_KEY = "docuexpiry-loaded";
 const MIN_LOAD_MS = 600;
 
 export function MarketingReadyProvider(props: { children: React.ReactNode }) {
-  // If the user already saw the loader this session, skip it entirely
-  const alreadyLoaded =
-    typeof sessionStorage !== "undefined" &&
-    sessionStorage.getItem(SESSION_KEY) === "1";
-
-  const [ready, setReady] = React.useState(alreadyLoaded);
+  // Always start false to match server render (no sessionStorage on server)
+  const [ready, setReady] = React.useState(false);
+  const [showLoader, setShowLoader] = React.useState(true);
 
   React.useEffect(() => {
-    if (alreadyLoaded) return;
+    // Returning visit: skip the loader entirely
+    if (sessionStorage.getItem(SESSION_KEY) === "1") {
+      setShowLoader(false);
+      setReady(true);
+      return;
+    }
 
+    // First visit: wait for fonts + minimum display time
     const start = Date.now();
-
     void document.fonts.ready.then(() => {
       const elapsed = Date.now() - start;
       const remaining = Math.max(0, MIN_LOAD_MS - elapsed);
@@ -34,12 +36,12 @@ export function MarketingReadyProvider(props: { children: React.ReactNode }) {
         setReady(true);
       }, remaining);
     });
-  }, [alreadyLoaded]);
+  }, []);
 
   return (
     <ReadyContext.Provider value={ready}>
       <AnimatePresence>
-        {!ready && (
+        {showLoader && !ready && (
           <motion.div
             key="loader"
             className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-background"
